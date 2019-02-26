@@ -44,6 +44,12 @@ class Client(object):
         return requests.get(url, headers=request_headers)
 
     @classmethod
+    def head(cls, url, headers={}, params={}):
+        """Execute a HEAD request"""
+        request_headers = { **Client.default_headers(), **headers }
+        return requests.head(url, headers=request_headers)
+
+    @classmethod
     def routes(cls):
         """Routes"""
         return Client.get(Client.api_host())
