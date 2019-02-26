@@ -12,7 +12,6 @@ The client is broken down into several concerns:
 * [Responses](#responses): These are the raw _responses_ form the API service request.
 * [Error Handling](#error-handling): These are all of the errors and exceptions that could be encountered.
 * [Modeling](#modeling): These are the domain models wrapped around the _response_ from the API service.
-* [Utilities](#utilities): Helper tools to manage the end-to-end flow
 
 ## Configuration
 The configuration can happen per instance or at a global level per application. This permits us to use with a single `access_token` in another context, or to use multiple clients.
