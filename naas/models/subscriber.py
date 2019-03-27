@@ -5,6 +5,7 @@ Subscriber
 
 This returns an instance of the Subscriber domain model
 """
+from naas.models.links import Links
 
 
 class Subscriber(object):
@@ -46,3 +47,6 @@ class Subscriber(object):
     def subscriber_email_addresses_attributes(self):
         """Returns the associated email addresses attributes"""
         return self.attributes.get('subscriber_email_addreses', [])
+
+    def links(self):
+        return Links(self.links_attributes())
