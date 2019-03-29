@@ -5,7 +5,7 @@ Subscriber
 
 This returns an instance of the Subscriber domain model
 """
-from naas.models.links import Links
+from naas.models import Links
 
 
 class Subscriber(object):
@@ -14,15 +14,15 @@ class Subscriber(object):
 
     def id(self):
         """Returns the subscriber id"""
-        return self.attributes.get('id', None)
+        return self.attributes.get('id')
 
     def first_name(self):
         """Returns the subscriber first_name"""
-        return self.attributes.get('first_name', None)
+        return self.attributes.get('first_name')
 
     def last_name(self):
         """Returns the subscriber last_name"""
-        return self.attributes.get('last_name', None)
+        return self.attributes.get('last_name')
 
     def full_name(self):
         """Returns the subscriber full_name"""
@@ -30,15 +30,15 @@ class Subscriber(object):
 
     def email(self):
         """Returns the subscriber email"""
-        return self.attributes.get('email', None)
+        return self.attributes.get('email')
 
     def created_at(self):
         """Returns the created at timestamp value"""
-        return self.attributes.get('created_at', None)
+        return self.attributes.get('created_at')
 
     def updated_at(self):
         """Returns the updated at timestamp value"""
-        return self.attributes.get('updated_at', None)
+        return self.attributes.get('updated_at')
 
     def links_attributes(self):
         """Returns the links collection attributes"""

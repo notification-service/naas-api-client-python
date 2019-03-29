@@ -5,8 +5,7 @@ Campaign
 
 This returns an instance of the Campaign domain model
 """
-from naas.models.campaign_email_templates import CampaignEmailTemplates
-from naas.models.links import Links
+from naas.models import Links, CampaignEmailTemplates
 
 
 class Campaign(object):
@@ -15,19 +14,19 @@ class Campaign(object):
 
     def id(self):
         """Returns the id"""
-        return self.attributes.get('id', None)
+        return self.attributes.get('id')
 
     def project_id(self):
         """Returns the id"""
-        return self.attributes.get('project_id', None)
+        return self.attributes.get('project_id')
 
     def name(self):
         """Returns the name"""
-        return self.attributes.get('name', None)
+        return self.attributes.get('name')
 
     def description(self):
         """Returns the description"""
-        return self.attributes.get('description', None)
+        return self.attributes.get('description')
 
     def campaign_email_templates_attributes(self):
         """Return the associated campaign email templates"""
@@ -43,15 +42,16 @@ class Campaign(object):
 
     def created_at(self):
         """Returns the created at timestamp value"""
-        return self.attributes.get('created_at', None)
+        return self.attributes.get('created_at')
 
     def updated_at(self):
         """Returns the updated at timestamp value"""
-        return self.attributes.get('updated_at', None)
+        return self.attributes.get('updated_at')
 
     def links_attributes(self):
         """Returns the links collection attributes"""
         return self.attributes.get('links', [])
 
     def links(self):
+        """Returns links"""
         return Links(self.links_attributes())
