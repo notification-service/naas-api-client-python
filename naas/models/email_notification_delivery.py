@@ -37,6 +37,11 @@ class EmailNotificationDelivery(object):
         """Returns true if this was completed"""
         return self.attributes.get('is_completed', False)
 
+    def started_at(self):
+        """ Returns the started timestamp"""
+        return datetime.datetime.strptime(
+            self.attributes.get('started_at'), '%Y-%m-%dT%H:%M:%S%z')
+
     def completed_at(self):
         """ Returns the completed timestamp"""
         return datetime.datetime.strptime(
