@@ -1,8 +1,8 @@
 import naas
 import requests
 
-from naas.requests import Directory
 from naas.models import Links
+
 
 class Directory(object):
     def __init__(self, attributes={}):

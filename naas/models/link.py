@@ -1,14 +1,14 @@
-"""
-
-Link
-===============
-
-This returns an instance of the Link domain model
-"""
-
 from uritemplate import URITemplate, expand
 
+
 class Link(object):
+	"""
+
+	Link
+	===============
+
+	This returns an instance of the Link domain model
+	"""
 	def __init__(self, attributes={}):
 		self.attributes = attributes
 
@@ -35,4 +35,3 @@ class Link(object):
 			return url.expand(args)
 		else:
 			return self.href()
-

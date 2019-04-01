@@ -1,5 +1,6 @@
 from naas.client import Client
 
+
 class Directory(object):
     @classmethod
     def retrieve(cls):

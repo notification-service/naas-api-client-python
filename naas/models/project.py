@@ -1,11 +1,11 @@
-"""
-
-Project
-===============
-
-This returns an instance of the Project domain model
-"""
 class Project(object):
+    """
+
+    Project
+    ===============
+
+    This returns an instance of the Project domain model
+    """
     def __init__(self, attributes):
         self.attributes = attributes
 

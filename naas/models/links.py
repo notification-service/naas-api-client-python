@@ -1,12 +1,14 @@
 from naas.models.link import Link
-"""
 
-Links
-===============
 
-This returns an instance of the Links domain model
-"""
 class Links(object):
+    """
+
+    Links
+    ===============
+
+    This returns an instance of the Links domain model
+    """
     def __init__(self, collection):
         self.collection = list(collection)
         self.index = len(self.collection)
@@ -21,6 +23,6 @@ class Links(object):
 
     def next(self):
         if self.index == 0:
-          raise StopIteration
+            raise StopIteration
         self.index = self.index - 1
         return self.collection[self.index]
