@@ -5,6 +5,7 @@ Subscriber Email Address
 
 This returns an instance of the Subscriber Email Address domain model
 """
+import datetime
 from naas.models import Links
 
 
@@ -33,16 +34,19 @@ class SubscriberEmailAddress(object):
         return self.attributes.get('confirmation_code')
 
     def confirmed_at(self):
-        """Returns the confirmed at timestamp value"""
-        return self.attributes.get('confirmed_at')
+        """Returns the confirmed at timestamp """
+        return datetime.datetime.strptime(
+            self.attributes.get('confirmed_at'), '%Y-%m-%dT%H:%M:%S%z')
 
     def created_at(self):
-        """Returns the created at timestamp value"""
-        return self.attributes.get('created_at')
+        """Returns the created at timestamp"""
+        return datetime.datetime.strptime(
+            self.attributes.get('created_at'), '%Y-%m-%dT%H:%M:%S%z')
 
     def updated_at(self):
-        """Returns the updated at timestamp value"""
-        return self.attributes.get('updated_at')
+        """Returns the updated at timestamp"""
+        return datetime.datetime.strptime(
+            self.attributes.get('updated_at'), '%Y-%m-%dT%H:%M:%S%z')
 
     def links_attributes(self):
         """Returns the links attributes"""
