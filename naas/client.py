@@ -39,18 +39,44 @@ class Client(object):
         return header_value
 
     @classmethod
-    def get(cls, url, headers={}, params={}):
+    def get(cls, url, headers=None, params=None):
         """Execute a GET request"""
+        if headers is None:
+            headers = {}
+        if params is None:
+            params = {}
         request_headers = {**Client.default_headers(), **headers}
-        return requests.get(url, headers=request_headers)
+        return requests.get(url, headers=request_headers, params=params)
 
     @classmethod
-    def head(cls, url, headers={}, params={}):
+    def head(cls, url, headers=None, params=None):
         """Execute a HEAD request"""
+        if headers is None:
+            headers = {}
+        if params is None:
+            params = {}
         request_headers = {**Client.default_headers(), **headers}
-        return requests.head(url, headers=request_headers)
+        return requests.head(url, headers=request_headers, params=params)
 
     @classmethod
-    def routes(cls):
-        """Routes"""
-        return Client.get(Client.api_host())
+    def post(cls, url, headers=None, json=None):
+        if headers is None:
+            headers = {}
+        if json is None:
+            json = {}
+        request_headers = {**Client.default_headers(), **headers}
+        return requests.post(url, headers=request_headers, json=json)
+
+    @classmethod
+    def put(cls, url, headers=None, json=None):
+        if headers is None:
+            headers = {}
+        if json is None:
+            json = {}
+        request_headers = {**Client.default_headers(), **headers}
+        return requests.put(url, headers=request_headers, json=json)
+
+    @classmethod
+    def create_route(cls, endpoint):
+        """Create routes from an endpoint"""
+        return f"{Client.api_host()}/{endpoint}"
