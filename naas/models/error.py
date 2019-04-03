@@ -1,14 +1,15 @@
-"""
-
-Error
-===============
-
-This returns an instance of the Error domain model
-"""
 from nass.models import ErrorItems
 
 
 class Error(object):
+    """
+
+    Error
+    ===============
+
+    This returns an instance of the Error domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 
@@ -28,6 +29,6 @@ class Error(object):
         """Returns the collection of ErrorItems"""
         return ErrorItems(self.errors_attributes)
 
-    def full_messages
+    def full_messages(self):
         """Delegate to the error for full messages"""
         return self.errors.full_messages

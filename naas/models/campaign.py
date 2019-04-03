@@ -1,14 +1,15 @@
-"""
-
-Campaign
-===============
-
-This returns an instance of the Campaign domain model
-"""
 from naas.models import Links, CampaignEmailTemplates
 
 
 class Campaign(object):
+    """
+
+    Campaign
+    ===============
+
+    This returns an instance of the Campaign domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 

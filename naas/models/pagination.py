@@ -1,13 +1,12 @@
-"""
-
-Pagination
-===============
-
-This returns an instance of the pagination domain model
-"""
-
-
 class Pagination(object):
+    """
+
+    Pagination
+    ===============
+
+    This returns an instance of the pagination domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 

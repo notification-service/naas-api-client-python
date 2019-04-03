@@ -1,14 +1,15 @@
-"""
-
-Account SMTP Setting
-===============
-
-This returns an instance of the Account Smtp Setting domain model
-"""
 from naas.models import Links
 
 
 class AccountSmtpSetting(object):
+    """
+
+    Account SMTP Setting
+    ===============
+
+    This returns an instance of the Account Smtp Setting domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 

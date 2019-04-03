@@ -1,18 +1,20 @@
-"""
-
-Email Notification
-===============
-
-This returns an instance of the Email Notification domain model
-"""
 import datetime
+
 from naas.models import (
     Links, EmailNotificationStatuses, EmailNotificationDeliveries
 )
-from requests import EmailNotificationStatuses as notification_status
+from naas.requests import EmailNotificationStatuses as notification_status
 
 
 class EmailNotification(object):
+    """
+
+    Email Notification
+    ===============
+
+    This returns an instance of the Email Notification domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 

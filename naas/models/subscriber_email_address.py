@@ -1,14 +1,15 @@
-"""
-
-Subscriber Email Address
-===============
-
-This returns an instance of the Subscriber Email Address domain model
-"""
 from naas.models import Links
 
 
 class SubscriberEmailAddress(object):
+    """
+
+    Subscriber Email Address
+    ===============
+
+    This returns an instance of the Subscriber Email Address domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 

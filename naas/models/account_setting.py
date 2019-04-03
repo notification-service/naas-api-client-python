@@ -1,13 +1,12 @@
-"""
-
-Account Setting
-===============
-
-This returns an instance of the account domain model
-"""
-
-
 class AccountSetting(object):
+    """
+
+    Account Setting
+    ===============
+
+    This returns an instance of the account domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 

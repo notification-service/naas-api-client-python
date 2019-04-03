@@ -1,13 +1,12 @@
-"""
-
-Error Item
-===============
-
-This returns an instance of the Error Item domain model
-"""
-
-
 class ErrorItem(object):
+    """
+
+    Error Item
+    ===============
+
+    This returns an instance of the Error Item domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 

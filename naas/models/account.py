@@ -1,14 +1,15 @@
-"""
-
-Account
-===============
-
-This returns an instance of the account domain model
-"""
 from naas.models import Links, AccountSetting
 
 
 class Account(object):
+    """
+
+    Account
+    ===============
+
+    This returns an instance of the account domain model
+    """
+
     def __init__(self, attributes={}):
         self.attributes = attributes
 
