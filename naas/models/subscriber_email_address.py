@@ -1,4 +1,4 @@
-import datetime
+import iso8601
 
 from naas.models import Links
 
@@ -35,23 +35,24 @@ class SubscriberEmailAddress(object):
         """Returns confirmation code for the record"""
         return self.attributes.get('confirmation_code')
 
+    def confirmed_at_value(self):
+        """Returns confirmation date value for the record"""
+        return self.attributes.get('confirmed_at')
+
     def confirmed_at(self):
         """Returns the confirmed at timestamp value"""
         try:
-          return datetime.datetime.strptime(
-            self.attributes.get('confirmed_at'), '%Y-%m-%dT%H:%M:%S%z')
-        except TypeError as e:
+          return iso8601.parse_date(self.confirmed_at_value())
+        except iso8601.iso8601.ParseError as e:
           None
 
     def created_at(self):
         """Returns the created at timestamp value"""
-        return datetime.datetime.strptime(
-            self.attributes.get('created_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('created_at'))
 
     def updated_at(self):
         """Returns the updated at timestamp value"""
-        return datetime.datetime.strptime(
-            self.attributes.get('updated_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('updated_at'))
 
     def links_attributes(self):
         """Returns the links attributes"""
