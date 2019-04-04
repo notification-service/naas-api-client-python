@@ -1,3 +1,5 @@
+import datetime
+
 from naas.models import Links
 
 
@@ -29,17 +31,19 @@ class Subscriber(object):
         """Returns the subscriber full_name"""
         return f'{self.first_name()} {self.last_name()}'
 
-    def email(self):
-        """Returns the subscriber email"""
-        return self.attributes.get('email')
+    def email_address(self):
+        """Returns the subscriber email address"""
+        return self.attributes.get('email_address')
 
     def created_at(self):
         """Returns the created at timestamp value"""
-        return self.attributes.get('created_at')
+        return datetime.datetime.strptime(
+            self.attributes.get('created_at'), '%Y-%m-%dT%H:%M:%S%z')
 
     def updated_at(self):
         """Returns the updated at timestamp value"""
-        return self.attributes.get('updated_at')
+        return datetime.datetime.strptime(
+            self.attributes.get('updated_at'), '%Y-%m-%dT%H:%M:%S%z')
 
     def links_attributes(self):
         """Returns the links collection attributes"""
