@@ -1,5 +1,4 @@
-from nass.models import ErrorItems
-
+from naas.models import ErrorItems
 
 class Error(object):
     """
