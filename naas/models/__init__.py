@@ -24,5 +24,5 @@ from naas.models.email_notification import EmailNotification
 from naas.models.error_item import ErrorItem
 from naas.models.error import Error
 from naas.models.pagination import Pagination
-from naas.models.subscriber_email_addreses import SubscriberEmailAddress
+from naas.models.subscriber_email_address import SubscriberEmailAddress
 from naas.models.subscriber import Subscriber
