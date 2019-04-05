@@ -5,7 +5,9 @@ from naas.models import Links
 
 
 class Directory(object):
-    def __init__(self, attributes={}):
+    def __init__(self, attributes=None):
+        if attributes is None:
+            attributes = {}
         self.attributes = attributes
 
     @classmethod

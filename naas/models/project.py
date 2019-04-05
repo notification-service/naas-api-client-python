@@ -1,3 +1,6 @@
+import datetime
+
+
 class Project(object):
     """
 
@@ -28,7 +31,7 @@ class Project(object):
     def created_at(self):
         """Returns the created at timestamp"""
         date_format = '%Y-%m-%dT%H:%M:%S%z'
-        date_value  = self.created_at_value
+        date_value = self.created_at_value
 
         try:
             return datetime.datetime.strptime(date_value, date_format)
