@@ -13,11 +13,10 @@ class Campaigns:
         """
         if params is None:
             params = {}
-        route = Client.create_route('rels/project-campaigns')
-        request = Client.get(
-            route,
-            params=params.update({'project_id': project_id})
-        )
+        rel = Client.rel_for('rels/project-campaigns')
+        route = Client.routes().route_for(rel)
+        url = route.url_for(args=params.update({'project_id': project_id}))
+        request = Client.get(url)
         return request
 
     @staticmethod
@@ -31,16 +30,18 @@ class Campaigns:
         """
         if params is None:
             params = {}
-        route = Client.create_route('rels/project-campaigns')
-        request = Client.get(
-            route,
-            params=params.update(
+
+        rel = Client.rel_for('rels/project-campaign')
+        route = Client.routes().route_for(rel)
+        url = route.url_for(
+            args=params.update(
                 {
                     'project_id': project_id,
                     'id': _id
                 }
             )
         )
+        request = Client.get(url)
         return request
 
     @staticmethod
@@ -53,11 +54,14 @@ class Campaigns:
         """
         if params is None:
             params = {}
-        route = Client.create_route(f'rels/project-campaigns/{project_id}')
+
+        rel = Client.rel_for('rels/project-campaigns')
+        route = Client.routes().route_for(rel)
+        url = route.url_for(args=params.update({'project_id': project_id}))
         request_body = {
             "campaign": params
         }
-        request = Client.post(route, json=request_body)
+        request = Client.post(url, data=request_body)
         return request
 
     @staticmethod
@@ -71,14 +75,20 @@ class Campaigns:
         """
         if params is None:
             params = {}
-        route = Client.create_route(
-            f'rels/project-campaigns/{project_id}/{_id}'
-        )
+
         request_body = {
             "campaign": params
         }
-        headers = {
-            'Content-Type': 'application/json'
-        }
-        request = Client.put(route, headers=headers, json=request_body)
+
+        rel = Client.rel_for('rels/project-campaign')
+        route = Client.routes().route_for(rel)
+        url = route.url_for(
+            args=params.update(
+                {
+                    'project_id': project_id,
+                    'id': _id
+                }
+            )
+        )
+        request = Client.put(url, data=request_body)
         return request
