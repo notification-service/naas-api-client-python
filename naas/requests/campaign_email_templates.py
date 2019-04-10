@@ -18,12 +18,9 @@ class CampaignEmailTemplates:
             params = {}
         rel = Client.rel_for('rels/project-campaign-campaign-email-templates')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update(
-            {
-                'project_id': project_id,
-                'campaign_id': campaign_id
-            }
-        ))
+        url = route.url_for(args={
+            **params, **{'project_id': project_id, 'campaign_id': campaign_id}
+        })
         request = Client.get(url)
         return request
 
@@ -43,13 +40,14 @@ class CampaignEmailTemplates:
             params = {}
         rel = Client.rel_for('rels/project-campaign-campaign-email-template')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update(
-            {
+        url = route.url_for(args={
+            **params,
+            **{
                 'project_id': project_id,
                 'campaign_id': campaign_id,
                 'id': _id
             }
-        ))
+        })
         request = Client.get(url)
         return request
 
@@ -71,13 +69,9 @@ class CampaignEmailTemplates:
         }
         rel = Client.rel_for('rels/projects')
         route = Client.routes().route_for(rel)
-        url = route.url_for(
-            args=params.update(
-                {
-                    'project_id': project_id,
-                    'campaign_id': campaign_id
-                }
-            )
-        )
+        url = route.url_for(args={
+            **params, **{'project_id': project_id, 'campaign_id': campaign_id}
+        })
+
         request = Client.post(url, data=request_body)
         return request
