@@ -18,13 +18,8 @@ class EmailNotificationDeliveries:
             'rels/email-notification-email-notification-deliveries'
         )
         route = Client.routes().route_for(rel)
-        url = route.url_for(
-            args=params.update(
-                {
-                    'email_notification_id': email_notification_id
-                }
-            )
-        )
+        url = route.url_for(args={
+            **params, **{'email_notification_id': email_notification_id}})
         request = Client.get(url)
         return request
 
@@ -46,13 +41,9 @@ class EmailNotificationDeliveries:
             'rels/email-notification-email-notification-delivery'
         )
         route = Client.routes().route_for(rel)
-        url = route.url_for(
-            args=params.update(
-                {
-                    'email_notification_id': email_notification_id,
-                    'id': _id
-                }
-            )
-        )
+        url = route.url_for(args={
+            **params,
+            **{'email_notification_id': email_notification_id, 'id': _id}
+        })
         request = Client.get(url)
         return request

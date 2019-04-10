@@ -32,7 +32,7 @@ class EmailNotifications:
             params = {}
         rel = Client.rel_for('rels/email-notification')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'id': _id}))
+        url = route.url_for(args={**params, **{'id': _id}})
         request = Client.get(url)
         return request
 
@@ -52,7 +52,7 @@ class EmailNotifications:
         }
         rel = Client.rel_for('rels/email-notification')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'id': _id}))
+        url = route.url_for(args={**params, **{'id': _id}})
         request = Client.put(url, data=request_body)
         return request
 
@@ -88,7 +88,7 @@ class EmailNotifications:
             params = {}
         rel = Client.rel_for('rels/email-notification-deliver')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'id': _id}))
+        url = route.url_for(args={**params, **{'id': _id}})
         request = Client.post(url)
         return request
 
@@ -105,6 +105,6 @@ class EmailNotifications:
             params = {}
         rel = Client.rel_for('rels/email-notification-preview')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'id': _id}))
+        url = route.url_for(args={**params, **{'id': _id}})
         request = Client.get(url)
         return request

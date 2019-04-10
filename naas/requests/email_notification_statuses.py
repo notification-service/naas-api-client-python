@@ -20,11 +20,8 @@ class EmailNotificationStatuses:
         )
         route = Client.routes().route_for(rel)
         url = route.url_for(
-            args=params.update(
-                {
-                    'email_notification_id': email_notification_id
-                }
-            )
+            args={**params, **{'email_notification_id': email_notification_id}}
         )
+
         request = Client.get(url)
         return request
