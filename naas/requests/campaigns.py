@@ -15,7 +15,7 @@ class Campaigns:
             params = {}
         rel = Client.rel_for('rels/project-campaigns')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'project_id': project_id}))
+        url = route.url_for(args={**params, **{'project_id': project_id}})
         request = Client.get(url)
         return request
 
@@ -34,13 +34,7 @@ class Campaigns:
         rel = Client.rel_for('rels/project-campaign')
         route = Client.routes().route_for(rel)
         url = route.url_for(
-            args=params.update(
-                {
-                    'project_id': project_id,
-                    'id': _id
-                }
-            )
-        )
+            args={**params, **{'project_id': project_id, 'id': _id}})
         request = Client.get(url)
         return request
 
@@ -57,7 +51,7 @@ class Campaigns:
 
         rel = Client.rel_for('rels/project-campaigns')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'project_id': project_id}))
+        url = route.url_for(args={**params, **{'project_id': project_id}})
         request_body = {
             "campaign": params
         }
@@ -83,12 +77,7 @@ class Campaigns:
         rel = Client.rel_for('rels/project-campaign')
         route = Client.routes().route_for(rel)
         url = route.url_for(
-            args=params.update(
-                {
-                    'project_id': project_id,
-                    'id': _id
-                }
-            )
-        )
+            args={**params, **{'project_id': project_id, 'id': _id}})
+
         request = Client.put(url, data=request_body)
         return request
