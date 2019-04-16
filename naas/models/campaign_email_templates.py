@@ -1,16 +1,16 @@
 from nass.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import AccountSetting, Error
-from naas.requests import AccountSmtpSettings
+from nass.models import CampaignEmailTemplate, Error
+from naas.requests import CampaignEmailTemplates
 
 
-class AccountSmtpSettings(object):
+class CampaignEmailTemplates(object):
     """
 
-    Account Smtp Settings
+    Campaign Email Templates
     ===============
 
-    This returns an instance of the account smtp settings domain model
+    This returns an instance of the campaign email temaplates model
     """
 
     def __init__(self, collection):
@@ -19,7 +19,7 @@ class AccountSmtpSettings(object):
 
     def __iter__(self):
         """ Implement iterator """
-        return map(lambda r: AccountSmtpSetting(r), self.collection)
+        return map(lambda r: CampaignEmailTemplate(r), self.collection)
 
     def next(self):
         if self.index == 0:
@@ -28,43 +28,45 @@ class AccountSmtpSettings(object):
         return self.collection[self.index]
 
     @classmethod
-    def list(params=None):
+    def list_by_project_id_and_campaign_id(project_id, campaign_id, params=None):
         if params is None:
             params = {}
-        request = AccountSmtpSettings.list(params)
+
+        request = CampaignEmailTemplates.list_by_project_id_and_campaign_id(
+            project_id, campaign_id, params)
+
         klass_attributes = []
 
         if request:
             klass_attributes = request.json().get('data')
         else:
             Configuration.logger.error(
-                "Failure retrieving the smtp settings {request.status_code}")
+                "Failure retrieving the email templates {request.status_code}")
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve(id, params=None):
+    def retrieve_by_project_id_and_campaign_id(project_id, campaign_id, id, params=None):
         if params is None:
             params = {}
 
-        request = AccountSmtpSettings.retrieve(id, params)
+        request = CampaignEmailTemplates.retrieve_by_project_id_and_campaign_id(
+            project_id, campaign_id, id, params)
 
         if request:
-            return AccountSmtpSetting(request.json().get('data'))
+            return CampaignEmailTemplate(request.json().get('data'))
         elif request.status_code == 404:
             raise RecordNotFoundError(f"Could not find record with id {id}")
 
         Configuration.logger.error(
-            f"Failure retrieving the smtp setting {request.status_code}")
+            f"Failure retrieving the email template {request.status_code}")
 
     @staticmethod
-    def create(params=None):
-        if params is None:
-            params = {}
-
-        request = AccountSmtpSettings.create(params)
+    def create_by_project_id_and_campaign_id(project_id, campaign_id, params=None):
+        request = CampaignEmailTemplates.create_by_project_id_and_campaign_id(
+            project_id, campaign_id, params)
 
         if request:
-            return AccountSmtpSettings(request.json().get('data'))
+            return CampaignEmailTemplate(request.json().get('data'))
 
         error = Error(request.json().get('data'))
         failure_message = (
