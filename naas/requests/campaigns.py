@@ -1,3 +1,4 @@
+import json
 from naas.client import Client
 
 
@@ -55,7 +56,10 @@ class Campaigns:
         request_body = {
             "campaign": params
         }
-        request = Client.post(url, data=request_body)
+        request_headers = {
+            "Content-Type": "application/json"
+        }
+        request = Client.post(url, headers=request_headers, data=json.dumps(request_body))
         return request
 
     @staticmethod
