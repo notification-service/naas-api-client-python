@@ -1,6 +1,5 @@
-import logging
-
-from requests import AccountSettings
+from nass.configuration import Configuration
+from naas.requests import AccountSettings
 
 
 class AccountSettings(object):
@@ -19,7 +18,6 @@ class AccountSettings(object):
             response_data = request.json().get('data')
             return AccountSetting(response_data)
 
-        logging.error(
+        Configuration.logging.error(
             f"Failure retrieving the account settings  {request.status_code}"
         )
-        return None

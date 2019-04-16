@@ -1,3 +1,5 @@
+import iso8601
+
 from naas.models import Links
 
 
@@ -55,11 +57,11 @@ class AccountSmtpSetting(object):
 
     def created_at(self):
         """Returns the created at timestamp value"""
-        return self.attributes.get('created_at')
+        return iso8601.parse_date(self.attributes.get('created_at'))
 
     def updated_at(self):
         """Returns the updated at timestamp value"""
-        return self.attributes.get('updated_at')
+        return iso8601.parse_date(self.attributes.get('updated_at'))
 
     def links_attributes(self):
         """Returns the links attributes"""

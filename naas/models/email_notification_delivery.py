@@ -1,4 +1,4 @@
-import datetime
+import iso8601
 
 from naas.models import Links
 
@@ -41,13 +41,11 @@ class EmailNotificationDelivery(object):
 
     def started_at(self):
         """ Returns the started timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('started_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('started_at'))
 
     def completed_at(self):
         """ Returns the completed timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('completed_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('completed_at'))
 
     def is_canceled(self):
         """Returns true if this was canceled"""
@@ -55,8 +53,7 @@ class EmailNotificationDelivery(object):
 
     def canceled_at(self):
         """Returns the canceled at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('canceled_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('canceled_at'))
 
     def is_errored(self):
         """Returns true if this was errored"""
@@ -70,18 +67,15 @@ class EmailNotificationDelivery(object):
 
     def duration_display(self):
         """Returns the duration as a display string"""
-        return datetime.datetime.strptime(
-            self.duration(), '%H:%M:%S').strftime('%s')
+        return str(self.duration())
 
     def created_at(self):
         """Returns the created at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('created_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('created_at'))
 
     def updated_at(self):
         """Returns the updated at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('updated_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('updated_at'))
 
     def links_attributes(self):
         """Returns the links collection attributes"""
