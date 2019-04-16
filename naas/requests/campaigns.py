@@ -75,7 +75,10 @@ class Campaigns:
             params = {}
 
         request_body = {
-            "campaign": params
+            "campaign": {**params, **{'project_id': project_id}}
+        }
+        request_headers = {
+            "Content-Type": "application/json"
         }
 
         rel = Client.rel_for('rels/project-campaign')
@@ -83,5 +86,5 @@ class Campaigns:
         url = route.url_for(
             args={**params, **{'project_id': project_id, 'id': _id}})
 
-        request = Client.put(url, data=request_body)
+        request = Client.put(url, headers=request_headers, data=json.dumps(request_body))
         return request
