@@ -1,0 +1,62 @@
+from nass.configuration import Configuration
+from nass.models import EmailNotificationDelivery
+from naas.requests import EmailNotificationDeliveries
+
+
+class EmailNotificationDeliveries(object):
+    """
+
+    Email Notification Deliveries
+    ===============
+
+    This returns an instance of the email notification deliveries model
+    """
+
+    def __init__(self, collection):
+        self.collection = list(collection)
+        self.index = len(self.collection)
+
+    def __iter__(self):
+        """ Implement iterator """
+        return map(lambda r: Campaign(r), self.collection)
+
+    def next(self):
+        if self.index == 0:
+            raise StopIteration
+        self.index = self.index - 1
+        return self.collection[self.index]
+
+    @classmethod
+    def list_by_email_notification_id(email_notification_id, params=None):
+        if params is None:
+            params = {}
+
+        request = EmailNotificationDeliveries.list_by_email_notification_id(
+            email_notification_id, params)
+
+        klass_attributes = []
+
+        if klass_attributes:
+            klass_attributes = request.json().get('data')
+        else:
+            Configuration.logger.error(
+                "Failure retrieving the email notification "
+                f"deliveries {request.status_code}"
+            )
+        return cls(klass_attributes)
+
+    @staticmethod
+    def retrieve_by_email_notification_id(email_notification_id, id, params=None):
+        if params is None:
+            params = {}
+
+        request = EmailNotificationDeliveries.retrieve_by_email_notification_id(
+            email_notification_id, id, params)
+
+        if request:
+            return EmailNotificationDelivery(request.json().get('data'))
+
+        configuration.logger.error(
+            "Failure retrieving the email notification delivery "
+            f"{request.status_code}"
+        )
