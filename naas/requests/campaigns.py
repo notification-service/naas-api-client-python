@@ -59,7 +59,8 @@ class Campaigns:
         request_headers = {
             "Content-Type": "application/json"
         }
-        request = Client.post(url, headers=request_headers, data=json.dumps(request_body))
+        request = Client.post(url, headers=request_headers,
+                              data=json.dumps(request_body))
         return request
 
     @staticmethod
@@ -86,5 +87,6 @@ class Campaigns:
         url = route.url_for(
             args={**params, **{'project_id': project_id, 'id': _id}})
 
-        request = Client.put(url, headers=request_headers, data=json.dumps(request_body))
+        request = Client.put(url, headers=request_headers,
+                             data=json.dumps(request_body))
         return request
