@@ -18,7 +18,7 @@ class EmailNotificationDeliveries(object):
 
     def __iter__(self):
         """ Implement iterator """
-        return map(lambda r: Campaign(r), self.collection)
+        return map(lambda r: EmailNotificationDelivery(r), self.collection)
 
     def next(self):
         if self.index == 0:

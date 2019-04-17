@@ -56,6 +56,7 @@ class CampaignEmailTemplates(object):
             return CampaignEmailTemplate(request.json().get('data'))
         elif request.status_code == 404:
             raise RecordNotFoundError(f"Could not find record with id {id}")
+            return
 
         Configuration.logger.error(
             f"Failure retrieving the email template {request.status_code}")
@@ -70,7 +71,7 @@ class CampaignEmailTemplates(object):
 
         error = Error(request.json().get('data'))
         failure_message = (
-            f"Failure creating the record {error.full_messages.inspect}")
+            f"Failure creating the record {error.full_messages}")
 
         Configuration.logger.error(failure_message)
         raise InvalidRequestError(failure_message)

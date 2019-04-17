@@ -1,16 +1,16 @@
 from nass.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import AccountSetting, Error
-from naas.requests import AccountSmtpSettings
+from nass.models import EmailNotification, Error
+from naas.requests import EmailNotifications
 
 
-class AccountSmtpSettings(object):
+class EmailNotifications(object):
     """
 
-    Account Smtp Settings
+    Email Notifications
     ===============
 
-    This returns an instance of the account smtp settings domain model
+    This returns an instance of the email notifications model
     """
 
     def __init__(self, collection):
@@ -19,26 +19,39 @@ class AccountSmtpSettings(object):
 
     def __iter__(self):
         """ Implement iterator """
-        return map(lambda r: AccountSmtpSetting(r), self.collection)
+        return map(lambda r: EmailNotification(r), self.collection)
 
-    def next(self):
-        if self.index == 0:
-            raise StopIteration
-        self.index = self.index - 1
-        return self.collection[self.index]
+    @staticmethod
+    def deliver(id, params=None):
+        if params is None:
+            params = {}
+
+        request = EmailNotifications.deliver(id, params)
+
+        if request:
+            Configuration.logger.info(
+                f"Delivered email notification {request.status_code}")
+        else:
+            Configuration.logger.info(
+                "Failure delivering the email notification "
+                f"{request.status_code}"
+            )
 
     @classmethod
     def list(params=None):
         if params is None:
             params = {}
-        request = AccountSmtpSettings.list(params)
+
+        request = EmailNotifications.list(params)
         klass_attributes = []
 
         if request:
             klass_attributes = request.json().get('data')
         else:
             Configuration.logger.error(
-                "Failure retrieving the smtp settings {request.status_code}")
+                "Failure retrieving the email notifications "
+                f"{request.status_code}"
+            )
         return cls(klass_attributes)
 
     @staticmethod
@@ -46,26 +59,26 @@ class AccountSmtpSettings(object):
         if params is None:
             params = {}
 
-        request = AccountSmtpSettings.retrieve(id, params)
+        request = EmailNotifications.retrieve(id, params)
 
         if request:
-            return AccountSmtpSetting(request.json().get('data'))
+            return EmailNotification(request.json().get('data'))
         elif request.status_code == 404:
             raise RecordNotFoundError(f"Could not find record with id {id}")
             return
 
         Configuration.logger.error(
-            f"Failure retrieving the smtp setting {request.status_code}")
+            f"Failure retrieving the email notification {request.status_code}")
 
     @staticmethod
     def create(params=None):
         if params is None:
             params = {}
 
-        request = AccountSmtpSettings.create(params)
+        request = EmailNotifications.create(params)
 
         if request:
-            return AccountSmtpSettings(request.json().get('data'))
+            return EmailNotification(request.json().get('data'))
 
         error = Error(request.json().get('data'))
         failure_message = (
