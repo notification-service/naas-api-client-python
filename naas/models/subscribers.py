@@ -1,16 +1,25 @@
 from nass.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import Project, Error
-from naas.requests import Projects
+from nass.models import Subscriber, Error
+from naas.requests import Subscribers
 
 
-class Projects(object):
+class Subscribers(object):
+    """
+
+    Subscribers
+    ===============
+
+    This returns an instance of the Ssbscribers model
+    """
+
     def __init__(self, collection):
         self.collection = list(collection)
+        self.index = len(self.collection)
 
     def __iter__(self):
         """ Implement iterator """
-        return map(lambda r: Project(r), self.collection)
+        return map(lambda r: Subscriber(r), self.collection)
 
     def next(self):
         if self.index == 0:
@@ -23,7 +32,7 @@ class Projects(object):
         if params is None:
             params = {}
 
-        request = Projects.list(params)
+        request = Subscribers.list(params)
 
         klass_attributes = []
 
@@ -31,7 +40,7 @@ class Projects(object):
             klass_attributes = request.json().get('data')
         else:
             Configuration.logger.error(
-                "Failure retrieving the projects {request.status_code}"
+                "Failure retrieving the subscribers {request.status_code}"
             )
         return cls(klass_attributes)
 
@@ -40,16 +49,16 @@ class Projects(object):
         if params is None:
             params = {}
 
-        request = Projects.retrieve(id, params)
+        request = Subscribers.retrieve(id, params)
 
         if request:
-            return Project(request.json().get('data'))
+            return Subscriber(request.json().get('data'))
         elif request.status_code == 404:
             raise RecordNotFoundError(f"Could not find record with id {id}")
             return
 
         Configuration.logger.error(
-            "Failure retrieving the project {request.status_code}"
+            "Failure retrieving the subscriber {request.status_code}"
         )
 
     @staticmethod
@@ -57,10 +66,10 @@ class Projects(object):
         if params is None:
             params = {}
 
-        request = Projects.create(params)
+        request = Subscribers.create(params)
 
         if request:
-            return Project(request.json().get('data'))
+            return Subscriber(request.json().get('data'))
 
         error = Error(request.json().get('data'))
         failure_message = (
