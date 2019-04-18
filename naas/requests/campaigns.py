@@ -1,5 +1,6 @@
 import json
 from naas.client import Client
+from naas.errors import InvalidRequestError
 
 
 class Campaigns:
@@ -90,3 +91,21 @@ class Campaigns:
         request = Client.put(url, headers=request_headers,
                              data=json.dumps(request_body))
         return request
+
+    @staticmethod
+    def update_by_project_id_with_attachments(project_id, _id, files):
+        """
+        Update an existing record with attachments
+        :param project_id: string
+        :param _id: string
+        :param files: dict/list Files to be uploaded with all the details
+        :return: Response
+        """
+        rel = Client.rel_for('rels/project-campaign')
+        route = Client.routes().route_for(rel)
+        url = route.url_for(args={'project_id': project_id, 'id': _id})
+
+        if files:
+            request = Client.put(url, files=files)
+            return request
+        raise InvalidRequestError("No files provided")
