@@ -1,10 +1,18 @@
 import logging
+import sys
 
 
 class Logger:
-    DEFAULT_PROGNAME = "NAAS_RUBY_CLIENT"
+    DEFAULT_PROGNAME = "NAAS_PYTHON_CLIENT"
 
-    def __init__(self):
+    def __init__(self, log_file=None):
+        handlers = [logging.StreamHandler(sys.stdout)]
+        if log_file:
+            handlers.append(logging.FileHandler(log_file))
+        logging.basicConfig(
+            level=logging.INFO,
+            handlers=handlers
+        )
         self.logger = logging.getLogger()
 
     def warn(self, message, progname=DEFAULT_PROGNAME):
