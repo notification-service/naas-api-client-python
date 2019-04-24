@@ -31,8 +31,7 @@ class Link(object):
 
     def url_for(self, args={}):
         """Returns the URL for this link"""
-        if self.templated() == True:
+        if self.templated():
             url = URITemplate(self.href())
             return url.expand(args)
-        else:
-            return self.href()
+        return self.href()

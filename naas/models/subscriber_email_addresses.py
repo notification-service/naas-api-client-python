@@ -1,6 +1,6 @@
-from nass.configuration import Configuration
+from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import SubscriberEmailAddress, Error
+from naas.models import SubscriberEmailAddress, Error
 from naas.requests import SubscriberEmailAddresses
 
 
@@ -29,6 +29,13 @@ class SubscriberEmailAddresses(object):
 
     @classmethod
     def list_by_subscriber_id(subscriber_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param _id: str
+        :param subscriber_id: str
+        :param params: dict
+        :return: SubscriberEmailAddresses
+        """
         if params is None:
             params = {}
 
@@ -48,6 +55,11 @@ class SubscriberEmailAddresses(object):
 
     @staticmethod
     def list(params=None):
+        """
+        Helper method to retrieve from the request
+        :param params: dict
+        :return: SubscriberEmailAddresses
+        """
         if params is None:
             params = {}
 
@@ -66,6 +78,11 @@ class SubscriberEmailAddresses(object):
 
     @staticmethod
     def create(params=None):
+        """
+        Create a new subscriber email address
+        :param params: dict
+        :return: SubscriberEmailAddress
+        """
         if params is None:
             params = {}
 
@@ -83,6 +100,12 @@ class SubscriberEmailAddresses(object):
 
     @staticmethod
     def retrieve(id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param _id: str
+        :param params: dict
+        :return: SubscriberEmailAddress
+        """
         if params is None:
             params = {}
 

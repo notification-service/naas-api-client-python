@@ -1,6 +1,6 @@
-from nass.configuration import Configuration
+from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import EmailNotification, Error
+from naas.models import EmailNotification, Error
 from naas.requests import EmailNotifications
 
 
@@ -22,11 +22,16 @@ class EmailNotifications(object):
         return map(lambda r: EmailNotification(r), self.collection)
 
     @staticmethod
-    def deliver(id, params=None):
+    def deliver(_id, params=None):
+        """
+        Deliver the email notification
+        :param _id: str
+        :param params: dict
+        """
         if params is None:
             params = {}
 
-        request = EmailNotifications.deliver(id, params)
+        request = EmailNotifications.deliver(_id, params)
 
         if request:
             Configuration.logger.info(
@@ -39,6 +44,11 @@ class EmailNotifications(object):
 
     @classmethod
     def list(params=None):
+        """
+        Helper method to retrieve from the request
+        :param params: dict
+        :return: EmailNotifications
+        """
         if params is None:
             params = {}
 
@@ -55,16 +65,23 @@ class EmailNotifications(object):
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve(id, params=None):
+    def retrieve(_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param _id: str
+        :param params: dict
+        :raises RecordNotFoundError
+        :return: EmailNotification
+        """
         if params is None:
             params = {}
 
-        request = EmailNotifications.retrieve(id, params)
+        request = EmailNotifications.retrieve(_id, params)
 
         if request:
             return EmailNotification(request.json().get('data'))
         elif request.status_code == 404:
-            raise RecordNotFoundError(f"Could not find record with id {id}")
+            raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
         Configuration.logger.error(
@@ -72,6 +89,12 @@ class EmailNotifications(object):
 
     @staticmethod
     def create(params=None):
+        """
+        Helper method to retrieve from the request
+        :param params: dict
+        :raises InvalidRequestError
+        :return: EmailNotification
+        """
         if params is None:
             params = {}
 

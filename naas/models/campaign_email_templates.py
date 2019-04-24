@@ -1,6 +1,6 @@
-from nass.configuration import Configuration
+from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import CampaignEmailTemplate, Error
+from naas.models import CampaignEmailTemplate, Error
 from naas.requests import CampaignEmailTemplates
 
 
@@ -29,6 +29,13 @@ class CampaignEmailTemplates(object):
 
     @classmethod
     def list_by_project_id_and_campaign_id(project_id, campaign_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param campaign_id: str
+        :param params: dict
+        :return: CampaignEmailTemplates
+        """
         if params is None:
             params = {}
 
@@ -45,17 +52,26 @@ class CampaignEmailTemplates(object):
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve_by_project_id_and_campaign_id(project_id, campaign_id, id, params=None):
+    def retrieve_by_project_id_and_campaign_id(project_id, campaign_id, _id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param _id: str
+        :param campaign_id: str
+        :param params: dict
+        :raises RecordNotFoundError
+        :return: CampaignEmailTemplate
+        """
         if params is None:
             params = {}
 
         request = CampaignEmailTemplates.retrieve_by_project_id_and_campaign_id(
-            project_id, campaign_id, id, params)
+            project_id, campaign_id, _id, params)
 
         if request:
             return CampaignEmailTemplate(request.json().get('data'))
         elif request.status_code == 404:
-            raise RecordNotFoundError(f"Could not find record with id {id}")
+            raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
         Configuration.logger.error(
@@ -63,6 +79,14 @@ class CampaignEmailTemplates(object):
 
     @staticmethod
     def create_by_project_id_and_campaign_id(project_id, campaign_id, params=None):
+        """
+        Create a new campaign email template
+        :param project_id: str
+        :param campaign_id: str
+        :param params: dict
+        :raises InvalidRequestError
+        :return: CampaignEmailTemplate
+        """
         request = CampaignEmailTemplates.create_by_project_id_and_campaign_id(
             project_id, campaign_id, params)
 

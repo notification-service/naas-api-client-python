@@ -42,9 +42,9 @@ class SubscriberEmailAddress(object):
     def confirmed_at(self):
         """Returns the confirmed at timestamp value"""
         try:
-          return iso8601.parse_date(self.confirmed_at_value())
+            return iso8601.parse_date(self.confirmed_at_value())
         except iso8601.iso8601.ParseError as e:
-          None
+            None
 
     def created_at(self):
         """Returns the created at timestamp value"""

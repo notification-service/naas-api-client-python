@@ -1,6 +1,6 @@
-from nass.configuration import Configuration
+from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import Campaign, Error
+from naas.models import Campaign, Error
 from naas.requests import Campaigns
 
 
@@ -29,6 +29,12 @@ class Campaigns(object):
 
     @classmethod
     def list_by_project_id(project_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param params: dict
+        :return: Campaigns
+        """
         if params is None:
             params = {}
 
@@ -45,16 +51,24 @@ class Campaigns(object):
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve_by_project_id(project_id, id, params=None):
+    def retrieve_by_project_id(project_id, _id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param _id: str
+        :param params: dict
+        :raises RecordNotFoundError
+        :return: Campaign
+        """
         if params is None:
             params = {}
 
-        request = Campaigns.retrieve_by_project_id(project_id, id, params)
+        request = Campaigns.retrieve_by_project_id(project_id, _id, params)
 
         if request:
             return Campaign(request.json().get('data'))
         elif request.status_code == 404:
-            raise RecordNotFoundError(f"Could not find record with id {id}")
+            raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
         Configuration.logger.error(
@@ -62,6 +76,13 @@ class Campaigns(object):
 
     @staticmethod
     def create_by_project_id(project_id, params=None):
+        """
+        Create a new campaign
+        :param project_id: str
+        :param params: dict
+        :raises InvalidRequestError
+        :return: Campaign
+        """
         if params is None:
             params = {}
 
@@ -78,11 +99,18 @@ class Campaigns(object):
         raise InvalidRequestError(failure_message)
 
     @staticmethod
-    def update_by_project_id(project_id, id, params=None):
+    def update_by_project_id(project_id, _id, params=None):
+        """
+        Update an existing campaign
+        :param project_id: str
+        :param _id: str
+        :param params: dict
+        :return: Campaign
+        """
         if params is None:
             params = {}
 
-        request = Campaigns.update_by_project_id(project_id, id, params)
+        request = Campaigns.update_by_project_id(project_id, _id, params)
 
         if request:
             return Campaign(request.json().get('data'))

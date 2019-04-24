@@ -1,6 +1,6 @@
-from nass.configuration import Configuration
+from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import AccountSetting, Error
+from naas.models import AccountSetting, Error
 from naas.requests import AccountSmtpSettings
 
 
@@ -29,6 +29,11 @@ class AccountSmtpSettings(object):
 
     @classmethod
     def list(params=None):
+        """
+        Helper method to retrieve from the request
+        :param params: dict Attributes
+        :return: AccountSmtpSettings
+        """
         if params is None:
             params = {}
         request = AccountSmtpSettings.list(params)
@@ -42,16 +47,23 @@ class AccountSmtpSettings(object):
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve(id, params=None):
+    def retrieve(_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param _id: str
+        :param params: dict
+        :raises RecordNotFoundError
+        :return: AccountSmtpSetting
+        """
         if params is None:
             params = {}
 
-        request = AccountSmtpSettings.retrieve(id, params)
+        request = AccountSmtpSettings.retrieve(_id, params)
 
         if request:
             return AccountSmtpSetting(request.json().get('data'))
         elif request.status_code == 404:
-            raise RecordNotFoundError(f"Could not find record with id {id}")
+            raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
         Configuration.logger.error(
@@ -59,13 +71,19 @@ class AccountSmtpSettings(object):
 
     @staticmethod
     def create(params=None):
+        """
+        Create a new SMTP setting
+        :param params: dict
+        :raises InvalidRequestError
+        :return: AccountSmtpSetting
+        """
         if params is None:
             params = {}
 
         request = AccountSmtpSettings.create(params)
 
         if request:
-            return AccountSmtpSettings(request.json().get('data'))
+            return AccountSmtpSetting(request.json().get('data'))
 
         error = Error(request.json().get('data'))
         failure_message = (

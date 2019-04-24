@@ -1,5 +1,5 @@
 from naas.models.link import Link
-from nass.errors import LinkNotFoundError
+from naas.errors import LinkNotFoundError
 
 
 class Links(object):
@@ -30,6 +30,11 @@ class Links(object):
         return self.collection[self.index]
 
     def find_by_rel(rel):
+        """
+        Find the link by its relationship
+        :raises LinkNotFoundError
+        :return: Link
+        """
         for record in self.collection:
             if record.rel() == rel:
                 return record

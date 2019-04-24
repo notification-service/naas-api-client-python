@@ -1,5 +1,5 @@
-from nass.configuration import Configuration
-from nass.models import EmailNotificationDelivery
+from naas.configuration import Configuration
+from naas.models import EmailNotificationDelivery
 from naas.requests import EmailNotificationDeliveries
 
 
@@ -28,6 +28,12 @@ class EmailNotificationDeliveries(object):
 
     @classmethod
     def list_by_email_notification_id(email_notification_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param email_notification_id: str
+        :param params: dict
+        :return: EmailNotificationDeliveries
+        """
         if params is None:
             params = {}
 
@@ -46,12 +52,19 @@ class EmailNotificationDeliveries(object):
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve_by_email_notification_id(email_notification_id, id, params=None):
+    def retrieve_by_email_notification_id(email_notification_id, _id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param email_notification_id: str
+        :param _id: str
+        :param params: dict
+        :return: EmailNotificationDelivery
+        """
         if params is None:
             params = {}
 
         request = EmailNotificationDeliveries.retrieve_by_email_notification_id(
-            email_notification_id, id, params)
+            email_notification_id, _id, params)
 
         if request:
             return EmailNotificationDelivery(request.json().get('data'))

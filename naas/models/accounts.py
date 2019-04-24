@@ -1,5 +1,5 @@
-from nass.configuration import Configuration
-from nass.models import Account
+from naas.configuration import Configuration
+from naas.models import Account
 from naas.requests import Accounts
 
 
@@ -27,7 +27,12 @@ class Accounts(object):
         return self.collection[self.index]
 
     @staticmethod
-    def retrieve(id, params=None):
+    def retrieve(params=None):
+        """
+        Helper method to retrieve from the request
+        :param params: dict
+        :return: Account
+        """
         if params is None:
             params = {}
 

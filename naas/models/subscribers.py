@@ -1,6 +1,6 @@
-from nass.configuration import Configuration
+from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import Subscriber, Error
+from naas.models import Subscriber, Error
 from naas.requests import Subscribers
 
 
@@ -29,6 +29,11 @@ class Subscribers(object):
 
     @staticmethod
     def list(params=None):
+        """
+        Helper method to retrieve from the request
+        :param params: dict
+        :return: Subscribers
+        """
         if params is None:
             params = {}
 
@@ -45,24 +50,35 @@ class Subscribers(object):
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve(id, params=None):
+    def retrieve(_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param _id: str
+        :param params: dict
+        :return: Subscriber
+        """
         if params is None:
             params = {}
 
-        request = Subscribers.retrieve(id, params)
+        request = Subscribers.retrieve(_id, params)
 
         if request:
             return Subscriber(request.json().get('data'))
         elif request.status_code == 404:
-            raise RecordNotFoundError(f"Could not find record with id {id}")
+            raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
         Configuration.logger.error(
-            "Failure retrieving the subscriber {request.status_code}"
+            "Failure retrieving the subscribern {request.status_code}"
         )
 
     @staticmethod
     def create(params=None):
+        """
+        Create a new subscriber
+        :param params: dict
+        :return: Subscriber
+        """
         if params is None:
             params = {}
 

@@ -1,4 +1,4 @@
-from nass.models import SubscriberEmailAddress, Error
+from naas.models import SubscriberEmailAddress, Error
 from naas.requests import EmailNotification
 
 
@@ -16,6 +16,16 @@ class EmailNotificationBasic(object):
             email_address, project_id, campaign_id,
             campaign_email_template_id, content=None, options=None
     ):
+        """
+        Helper method to create from the request
+        :param email_address: str
+        :param project_id
+        :param campaign_id str
+        :paramcampaign_email_template_id
+        :param content: dict
+        :param options: dict
+        :return: EmailNotification
+        """
         request = EmailNotificationBasics.create_from_attributes(
             email_address, project_id, campaign_id,
             campaign_email_template_id, content, options

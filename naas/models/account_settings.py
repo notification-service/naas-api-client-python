@@ -1,4 +1,4 @@
-from nass.configuration import Configuration
+from naas.configuration import Configuration
 from naas.requests import AccountSettings
 
 
@@ -13,11 +13,16 @@ class AccountSettings(object):
 
     @staticmethod
     def retrieve():
+        """
+        Helper method to retrieve from the request
+
+        :return: AccountSetting
+        """
         request = AccountSettings.retrieve()
         if request:
             response_data = request.json().get('data')
             return AccountSetting(response_data)
 
         Configuration.logging.error(
-            f"Failure retrieving the account settings  {request.status_code}"
+            f"Failure retrieving the account settings {request.status_code}"
         )

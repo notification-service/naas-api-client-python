@@ -1,6 +1,6 @@
-from nass.configuration import Configuration
+from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from nass.models import Project, Error
+from naas.models import Project, Error
 from naas.requests import Projects
 
 
@@ -20,6 +20,11 @@ class Projects(object):
 
     @staticmethod
     def list(params=None):
+        """
+        Helper method to retrieve from the request
+        :param params: dict
+        :return: Projects
+        """
         if params is None:
             params = {}
 
@@ -36,16 +41,22 @@ class Projects(object):
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve(id, params=None):
+    def retrieve(_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param _id: str
+        :param params: dict
+        :return: Project
+        """
         if params is None:
             params = {}
 
-        request = Projects.retrieve(id, params)
+        request = Projects.retrieve(_id, params)
 
         if request:
             return Project(request.json().get('data'))
         elif request.status_code == 404:
-            raise RecordNotFoundError(f"Could not find record with id {id}")
+            raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
         Configuration.logger.error(
@@ -54,6 +65,11 @@ class Projects(object):
 
     @staticmethod
     def create(params=None):
+        """
+        Create a new project
+        :param params: dict
+        :return: Project
+        """
         if params is None:
             params = {}
 

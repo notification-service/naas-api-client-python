@@ -1,5 +1,5 @@
-from nass.configuration import Configuration
-from nass.models import EmailNotificationStatus
+from naas.configuration import Configuration
+from naas.models import EmailNotificationStatus
 from naas.requests import EmailNotificationStatuses
 
 
@@ -27,6 +27,12 @@ class EmailNotificationStatuses(object):
         return self.collection[self.index]
 
     def retrieve_by_email_notification_id(email_notification_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param email_notification_id,: str
+        :param params: dict
+        :return: EmailNotificationStatus
+        """
         if params is None:
             params = {}
 

@@ -1,4 +1,4 @@
-from nass.models import ErrorItem
+from naas.models import ErrorItem
 
 
 class ErrorItems(object):
@@ -25,4 +25,7 @@ class ErrorItems(object):
         return self.collection[self.index]
 
     def full_messages(self):
+        """
+        Returns the full messages as a string
+        """
         return ', '.join([record.full_message() for record in self.collection])
