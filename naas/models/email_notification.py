@@ -1,4 +1,4 @@
-import datetime
+import iso8601
 
 from naas.models import (
     Links, EmailNotificationStatuses, EmailNotificationDeliveries
@@ -112,18 +112,15 @@ class EmailNotification(object):
 
     def last_sent_at(self):
         """Returns the last sent at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('last_sent_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('last_sent_at'))
 
     def created_at(self):
         """Returns the created at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('created_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('created_at'))
 
     def updated_at(self):
         """Returns the updated at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('updated_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('updated_at')
 
     def links_attributes(self):
         """Returns the links attributes"""

@@ -1,4 +1,4 @@
-import datetime
+import iso8601
 
 from naas.models import Links
 
@@ -29,8 +29,7 @@ class EmailNotificationStatus(object):
 
     def started_at(self):
         """ Returns the started timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('started_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('started_at'))
 
     def elapsed_seconds(self):
         """Returns the elapsed seconds"""
@@ -42,13 +41,11 @@ class EmailNotificationStatus(object):
 
     def created_at(self):
         """Returns the created at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('created_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('created_at'))
 
     def updated_at(self):
         """Returns the updated at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('updated_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('updated_at'))
 
     def links_attributes(self):
         """Returns the links collection attributes"""

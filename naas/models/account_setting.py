@@ -1,3 +1,6 @@
+import iso8601
+
+
 class AccountSetting(object):
     """
 
@@ -20,8 +23,8 @@ class AccountSetting(object):
 
     def created_at(self):
         """Returns the created at timestamp value"""
-        return self.attributes.get('created_at')
+        return iso8601.parse_date(self.attributes.get('created_at'))
 
     def updated_at(self):
         """Returns the updated at timestamp value"""
-        return self.attributes.get('updated_at')
+        return iso8601.parse_date(self.attributes.get('updated_at'))

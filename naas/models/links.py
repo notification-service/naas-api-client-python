@@ -1,4 +1,5 @@
 from naas.models.link import Link
+from naas.errors import LinkNotFoundError
 
 
 class Links(object):
@@ -27,3 +28,14 @@ class Links(object):
             raise StopIteration
         self.index = self.index - 1
         return self.collection[self.index]
+
+    def find_by_rel(rel):
+        """
+        Find the link by its relationship
+        :raises LinkNotFoundError
+        :return: Link
+        """
+        for record in self.collection:
+            if record.rel() == rel:
+                return record
+        raise LinkNotFoundError

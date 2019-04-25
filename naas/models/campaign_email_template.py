@@ -53,13 +53,11 @@ class CampaignEmailTemplate(object):
 
     def created_at(self):
         """Returns the created at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('created_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('created_at'))
 
     def updated_at(self):
         """Returns the updated at timestamp"""
-        return datetime.datetime.strptime(
-            self.attributes.get('updated_at'), '%Y-%m-%dT%H:%M:%S%z')
+        return iso8601.parse_date(self.attributes.get('updated_at'))
 
     def links_attributes(self):
         """Returns the links attributes"""
