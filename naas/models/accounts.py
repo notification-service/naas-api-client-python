@@ -1,6 +1,6 @@
 from naas.configuration import Configuration
-from naas.models import Account
-from naas.requests import Accounts
+from naas.models.account import Account
+from naas.requests.accounts import Accounts
 
 
 class Accounts(object):

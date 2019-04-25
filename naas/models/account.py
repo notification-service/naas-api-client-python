@@ -1,6 +1,7 @@
 import iso8601
 
-from naas.models import Links, AccountSetting
+from naas.models.links import Links
+from naas.models.account_setting import AccountSetting
 
 
 class Account(object):

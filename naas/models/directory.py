@@ -1,7 +1,7 @@
 import naas
 import requests
 
-from naas.models import Links
+from naas.models.links import Links
 
 
 class Directory(object):

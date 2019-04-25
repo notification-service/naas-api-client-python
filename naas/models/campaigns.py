@@ -1,7 +1,8 @@
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import Campaign, Error
-from naas.requests import Campaigns
+from naas.models.campaign import Campaign
+from naas.models.error import Error
+from naas.requests.campaigns import Campaigns
 
 
 class Campaigns(object):

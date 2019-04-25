@@ -1,9 +1,9 @@
 import iso8601
 
-from naas.models import (
-    Links, EmailNotificationStatuses, EmailNotificationDeliveries
-)
-from naas.requests import EmailNotificationStatuses as notification_status
+from naas.models import Links
+from naas.models.email_notification_statuses import EmailNotificationStatuses
+from naas.models.email_notification_deliveries import EmailNotificationDeliveries
+from naas.requests.email_notification_statuses import EmailNotificationStatuses as notification_status
 
 
 class EmailNotification(object):

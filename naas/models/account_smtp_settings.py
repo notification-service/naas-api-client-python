@@ -1,7 +1,8 @@
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import AccountSetting, Error
-from naas.requests import AccountSmtpSettings
+from naas.models.account_setting import AccountSetting
+from naas.models.error import Error
+from naas.requests.account_settings import AccountSmtpSettings
 
 
 class AccountSmtpSettings(object):

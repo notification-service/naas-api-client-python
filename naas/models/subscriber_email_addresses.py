@@ -1,7 +1,8 @@
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import SubscriberEmailAddress, Error
-from naas.requests import SubscriberEmailAddresses
+from naas.models.subscriber_email_address import SubscriberEmailAddress
+from naas.models.error import Error
+from naas.requests.subscriber_email_addresses import SubscriberEmailAddresses
 
 
 class SubscriberEmailAddresses(object):

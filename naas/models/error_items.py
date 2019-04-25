@@ -1,4 +1,4 @@
-from naas.models import ErrorItem
+from naas.models.error_item import ErrorItem
 
 
 class ErrorItems(object):

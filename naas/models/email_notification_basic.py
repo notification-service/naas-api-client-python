@@ -1,5 +1,5 @@
-from naas.models import SubscriberEmailAddress, Error
-from naas.requests import EmailNotification
+from naas.models.email_notification import EmailNotification
+from naas.requests.email_notification_basics import EmailNotificationBasics
 
 
 class EmailNotificationBasic(object):

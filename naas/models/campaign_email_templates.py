@@ -1,7 +1,8 @@
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import CampaignEmailTemplate, Error
-from naas.requests import CampaignEmailTemplates
+from naas.models.campaign_email_template import CampaignEmailTemplate
+from naas.models.error import Error
+from naas.requests.campaign_email_templates import CampaignEmailTemplates
 
 
 class CampaignEmailTemplates(object):

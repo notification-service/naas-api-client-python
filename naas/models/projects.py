@@ -1,7 +1,7 @@
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
 from naas.models import Project, Error
-from naas.requests import Projects
+from naas.requests.projects import Projects
 
 
 class Projects(object):

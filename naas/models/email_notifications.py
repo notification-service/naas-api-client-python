@@ -1,7 +1,8 @@
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import EmailNotification, Error
-from naas.requests import EmailNotifications
+from naas.models.email_notification import EmailNotification
+from naas.models.error import Error
+from naas.requests.email_notifications import EmailNotifications
 
 
 class EmailNotifications(object):

@@ -1,6 +1,6 @@
 from naas.configuration import Configuration
-from naas.models import EmailNotificationStatus
-from naas.requests import EmailNotificationStatuses
+from naas.models.email_notification_status import EmailNotificationStatus
+from naas.requests.email_notification_statuses import EmailNotificationStatuses
 
 
 class EmailNotificationStatuses(object):

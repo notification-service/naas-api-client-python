@@ -1,6 +1,6 @@
 from naas.configuration import Configuration
-from naas.models import AccountSetting
-from naas.requests import AccountSettings
+from naas.models.account_setting import AccountSetting
+from naas.requests.account_settings import AccountSettings
 
 
 class AccountSettings(object):
@@ -24,6 +24,6 @@ class AccountSettings(object):
             response_data = request.json().get('data')
             return AccountSetting(response_data)
 
-        Configuration.logging.error(
+        Configuration.logger.error(
             f"Failure retrieving the account settings {request.status_code}"
         )

@@ -1,6 +1,6 @@
 from naas.configuration import Configuration
-from naas.models import EmailNotificationDelivery
-from naas.requests import EmailNotificationDeliveries
+from naas.models.email_notification_delivery import EmailNotificationDelivery
+from naas.requests.email_notification_deliveries import EmailNotificationDeliveries
 
 
 class EmailNotificationDeliveries(object):

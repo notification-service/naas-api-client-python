@@ -1,6 +1,6 @@
 import iso8601
 
-from naas.models import Links
+from naas.models.links import Links
 
 
 class SubscriberEmailAddress(object):

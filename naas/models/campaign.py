@@ -1,6 +1,7 @@
 import iso8601
 
-from naas.models import Links, CampaignEmailTemplates
+from naas.models.links import Links
+from naas.models.campaign_email_templates import CampaignEmailTemplates
 
 
 class Campaign(object):
