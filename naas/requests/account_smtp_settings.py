@@ -34,7 +34,7 @@ class AccountSmtpSettings:
             params = {}
         rel = Client.rel_for('rels/smtp-setting')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'id': _id}))
+        url = route.url_for(args={**params, **{'id': _id}})
 
         try:
             request = Client.get(url)

@@ -32,7 +32,7 @@ class Projects:
             params = {}
         rel = Client.rel_for('rels/projects')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'id': _id}))
+        url = route.url_for(args={**params, **{'id': _id}})
         request = Client.get(url)
         return request
 
@@ -77,6 +77,6 @@ class Projects:
         }
         rel = Client.rel_for('rels/project')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'id': _id}))
+        url = route.url_for(args={**params, **{'id': _id}})
         request = Client.put(url, headers=headers, data=request_body)
         return request

@@ -32,7 +32,7 @@ class SubscriberEmailAddresses:
             params = {}
         rel = Client.rel_for('rels/subscriber-email-address')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update({'id': _id}))
+        url = route.url_for(args={**params, **{'id': _id}})
         request = Client.get(url)
         return request
 
@@ -68,10 +68,8 @@ class SubscriberEmailAddresses:
             params = {}
         rel = Client.rel_for('rels/subscriber-subscriber-email-addresses')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args=params.update(
-            {
-                'subscriber_id': subscriber_id
-            }
-        ))
+        url = route.url_for(args={
+            **params, **{'subscriber_id': subscriber_id}
+        })
         request = Client.get(url)
         return request
