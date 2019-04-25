@@ -13,8 +13,8 @@ class DefaultConfiguration:
     These are all overrideable through the `configure`
     interface
     """
-    API_HOST = 'http://naas-api.deviceindependent.com'
-    USER_AGENT = f"NAAS Ruby Gem {version.Client.VERSION}"
+    API_HOST = 'https://naas-api-staging.tinylab.com'
+    USER_AGENT = f"NAAS Python Client {version.Client.VERSION}"
     MEDIA_TYPE = 'application/json'
     CONTENT_TYPE = 'application/json'
 
@@ -82,11 +82,11 @@ class DefaultConfiguration:
     def request_logger():
         """
         Return the Default NAAS Logger to STDOUT.
-        The default logger for Faraday to log requests.
+        The default logger to log requests.
 
         :return: Logger
         """
-        return Logger()
+        return Logger(log_file=os.environ.get("NAAS_LOG_FILE"))
 
     @staticmethod
     def cache_logger():
@@ -96,7 +96,7 @@ class DefaultConfiguration:
 
         :return: Logger
         """
-        return Logger()
+        return Logger(log_file=os.environ.get("NAAS_LOG_FILE"))
 
     @staticmethod
     def logger():
@@ -106,7 +106,7 @@ class DefaultConfiguration:
 
         :return: Logger
         """
-        return Logger()
+        return Logger(log_file=os.environ.get("NAAS_LOG_FILE"))
 
     def connection_options(self):
         """
