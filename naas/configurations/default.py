@@ -1,5 +1,5 @@
 import os
-from naas.client import version
+from naas.client_dir import version
 from naas.configuration import Configuration
 from naas.logger import Logger
 
