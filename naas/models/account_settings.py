@@ -1,4 +1,5 @@
 from naas.configuration import Configuration
+from naas.models import AccountSetting
 from naas.requests import AccountSettings
 
 
