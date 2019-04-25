@@ -9,6 +9,7 @@ class Links(object):
 
     This returns an instance of the Links domain model
     """
+
     def __init__(self, collection):
         self.collection = list(collection)
         self.index = len(self.collection)
