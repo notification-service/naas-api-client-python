@@ -24,7 +24,7 @@ class Configuration:
                 key,
                 attributes.get(
                     key,
-                    DefaultConfiguration.options()[key]
+                    self.options()[key]
                 )
             )
 
@@ -75,4 +75,14 @@ class Configuration:
         :return: Configuration The configuration with Defaults applied
         """
         for key in self.keys():
-            setattr(self, key, DefaultConfiguration.options()[key])
+            setattr(self, key, self.options()[key])
+
+    def options(self):
+        """
+        Return the collection of default options and values
+        :return: dict Keys and Values of default configuration
+        """
+        config = {}
+        for key in self.keys():
+            config[key] = eval('DefaultConfiguration.' + key + '()')
+        return config
