@@ -1,7 +1,5 @@
 import naas
-import requests
-
-from naas.models import Links
+from naas.models.links import Links
 
 
 class Directory(object):
@@ -15,7 +13,7 @@ class Directory(object):
         """Retrieve the directory listing"""
         request = naas.requests.Directory.retrieve()
 
-        if request.status_code == requests.codes.ok:
+        if request:
             response_data = request.json()['data']
             return cls(response_data)
         else:

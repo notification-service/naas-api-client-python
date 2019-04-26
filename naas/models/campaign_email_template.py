@@ -1,6 +1,5 @@
 import datetime
-
-from naas.models import Links
+from naas.models.links import Links
 
 
 class CampaignEmailTemplate(object):

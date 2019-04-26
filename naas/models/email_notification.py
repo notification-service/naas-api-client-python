@@ -1,9 +1,9 @@
 import iso8601
+import naas
 
-from naas.models import (
-    Links, EmailNotificationStatuses, EmailNotificationDeliveries
-)
-from naas.requests import EmailNotificationStatuses as notification_status
+from naas.models import Links
+from naas.models.email_notification_statuses import EmailNotificationStatuses
+from naas.models.email_notification_deliveries import EmailNotificationDeliveries
 
 
 class EmailNotification(object):
@@ -28,7 +28,8 @@ class EmailNotification(object):
 
     def delivery_status(self):
         """Returns the delivery status"""
-        status = notification_status.retrieve_by_email_notification_id(self.id)
+        status = naas.requests.EmailNotificationStatuses.retrieve_by_email_notification_id(
+            self.id)
         if status:
             return EmailNotificationStatuses.retrieve_by_email_notification_id(
                 self.id)
@@ -120,7 +121,7 @@ class EmailNotification(object):
 
     def updated_at(self):
         """Returns the updated at timestamp"""
-        return iso8601.parse_date(self.attributes.get('updated_at')
+        return iso8601.parse_date(self.attributes.get('updated_at'))
 
     def links_attributes(self):
         """Returns the links attributes"""

@@ -1,7 +1,8 @@
+import naas
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import CampaignEmailTemplate, Error
-from naas.requests import CampaignEmailTemplates
+from naas.models.campaign_email_template import CampaignEmailTemplate
+from naas.models.error import Error
 
 
 class CampaignEmailTemplates(object):
@@ -39,7 +40,7 @@ class CampaignEmailTemplates(object):
         if params is None:
             params = {}
 
-        request = CampaignEmailTemplates.list_by_project_id_and_campaign_id(
+        request = naas.requests.CampaignEmailTemplates.list_by_project_id_and_campaign_id(
             project_id, campaign_id, params)
 
         klass_attributes = []
@@ -65,7 +66,7 @@ class CampaignEmailTemplates(object):
         if params is None:
             params = {}
 
-        request = CampaignEmailTemplates.retrieve_by_project_id_and_campaign_id(
+        request = naas.requests.CampaignEmailTemplates.retrieve_by_project_id_and_campaign_id(
             project_id, campaign_id, _id, params)
 
         if request:
@@ -87,7 +88,7 @@ class CampaignEmailTemplates(object):
         :raises InvalidRequestError
         :return: CampaignEmailTemplate
         """
-        request = CampaignEmailTemplates.create_by_project_id_and_campaign_id(
+        request = naas.requests.CampaignEmailTemplates.create_by_project_id_and_campaign_id(
             project_id, campaign_id, params)
 
         if request:

@@ -1,7 +1,8 @@
+import naas
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import EmailNotification, Error
-from naas.requests import EmailNotifications
+from naas.models.email_notification import EmailNotification
+from naas.models.error import Error
 
 
 class EmailNotifications(object):
@@ -31,7 +32,7 @@ class EmailNotifications(object):
         if params is None:
             params = {}
 
-        request = EmailNotifications.deliver(_id, params)
+        request = naas.requests.EmailNotifications.deliver(_id, params)
 
         if request:
             Configuration.logger.info(
@@ -52,7 +53,7 @@ class EmailNotifications(object):
         if params is None:
             params = {}
 
-        request = EmailNotifications.list(params)
+        request = naas.requests.EmailNotifications.list(params)
         klass_attributes = []
 
         if request:
@@ -76,7 +77,7 @@ class EmailNotifications(object):
         if params is None:
             params = {}
 
-        request = EmailNotifications.retrieve(_id, params)
+        request = naas.requests.EmailNotifications.retrieve(_id, params)
 
         if request:
             return EmailNotification(request.json().get('data'))
@@ -98,7 +99,7 @@ class EmailNotifications(object):
         if params is None:
             params = {}
 
-        request = EmailNotifications.create(params)
+        request = naas.requests.EmailNotifications.create(params)
 
         if request:
             return EmailNotification(request.json().get('data'))

@@ -1,6 +1,6 @@
+import naas
 from naas.configuration import Configuration
-from naas.models import EmailNotificationDelivery
-from naas.requests import EmailNotificationDeliveries
+from naas.models.email_notification_delivery import EmailNotificationDelivery
 
 
 class EmailNotificationDeliveries(object):
@@ -37,7 +37,7 @@ class EmailNotificationDeliveries(object):
         if params is None:
             params = {}
 
-        request = EmailNotificationDeliveries.list_by_email_notification_id(
+        request = naas.requests.EmailNotificationDeliveries.list_by_email_notification_id(
             email_notification_id, params)
 
         klass_attributes = []
@@ -63,7 +63,7 @@ class EmailNotificationDeliveries(object):
         if params is None:
             params = {}
 
-        request = EmailNotificationDeliveries.retrieve_by_email_notification_id(
+        request = naas.requests.EmailNotificationDeliveries.retrieve_by_email_notification_id(
             email_notification_id, _id, params)
 
         if request:

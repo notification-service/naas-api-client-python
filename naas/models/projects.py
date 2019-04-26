@@ -1,7 +1,8 @@
+import naas
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import Project, Error
-from naas.requests import Projects
+from naas.models.project import Project
+from naas.models.error import Error
 
 
 class Projects(object):
@@ -28,7 +29,7 @@ class Projects(object):
         if params is None:
             params = {}
 
-        request = Projects.list(params)
+        request = naas.requests.Projects.list(params)
 
         klass_attributes = []
 
@@ -51,7 +52,7 @@ class Projects(object):
         if params is None:
             params = {}
 
-        request = Projects.retrieve(_id, params)
+        request = naas.requests.Projects.retrieve(_id, params)
 
         if request:
             return Project(request.json().get('data'))
@@ -73,7 +74,7 @@ class Projects(object):
         if params is None:
             params = {}
 
-        request = Projects.create(params)
+        request = naas.requests.Projects.create(params)
 
         if request:
             return Project(request.json().get('data'))

@@ -1,7 +1,8 @@
+import naas
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import AccountSetting, Error
-from naas.requests import AccountSmtpSettings
+from naas.models.account_setting import AccountSetting
+from naas.models.error import Error
 
 
 class AccountSmtpSettings(object):
@@ -36,7 +37,7 @@ class AccountSmtpSettings(object):
         """
         if params is None:
             params = {}
-        request = AccountSmtpSettings.list(params)
+        request = naas.requests.AccountSmtpSettings.list(params)
         klass_attributes = []
 
         if request:
@@ -58,7 +59,7 @@ class AccountSmtpSettings(object):
         if params is None:
             params = {}
 
-        request = AccountSmtpSettings.retrieve(_id, params)
+        request = naas.requests.AccountSmtpSettings.retrieve(_id, params)
 
         if request:
             return AccountSmtpSetting(request.json().get('data'))
@@ -80,7 +81,7 @@ class AccountSmtpSettings(object):
         if params is None:
             params = {}
 
-        request = AccountSmtpSettings.create(params)
+        request = naas.requests.AccountSmtpSettings.create(params)
 
         if request:
             return AccountSmtpSetting(request.json().get('data'))

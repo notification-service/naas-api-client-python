@@ -1,7 +1,8 @@
+import naas
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models import Subscriber, Error
-from naas.requests import Subscribers
+from naas.models.subscriber import Subscriber
+from naas.models.error import Error
 
 
 class Subscribers(object):
@@ -37,7 +38,7 @@ class Subscribers(object):
         if params is None:
             params = {}
 
-        request = Subscribers.list(params)
+        request = naas.requests.Subscribers.list(params)
 
         klass_attributes = []
 
@@ -60,7 +61,7 @@ class Subscribers(object):
         if params is None:
             params = {}
 
-        request = Subscribers.retrieve(_id, params)
+        request = naas.requests.Subscribers.retrieve(_id, params)
 
         if request:
             return Subscriber(request.json().get('data'))
@@ -82,7 +83,7 @@ class Subscribers(object):
         if params is None:
             params = {}
 
-        request = Subscribers.create(params)
+        request = naas.requests.Subscribers.create(params)
 
         if request:
             return Subscriber(request.json().get('data'))
