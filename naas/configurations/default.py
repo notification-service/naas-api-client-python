@@ -1,9 +1,5 @@
 import os
 from naas.client_dir import version
-<<<<<<< Updated upstream
-from naas.configuration import Configuration
-=======
->>>>>>> Stashed changes
 from naas.logger import Logger
 
 
