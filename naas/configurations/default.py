@@ -1,6 +1,9 @@
 import os
 from naas.client_dir import version
+<<<<<<< Updated upstream
 from naas.configuration import Configuration
+=======
+>>>>>>> Stashed changes
 from naas.logger import Logger
 
 
@@ -17,18 +20,6 @@ class DefaultConfiguration:
     USER_AGENT = f"NAAS Python Client {version.Client.VERSION}"
     MEDIA_TYPE = 'application/json'
     CONTENT_TYPE = 'application/json'
-
-    @staticmethod
-    def options():
-        """
-        Return the collection of default options and values
-
-        :return: dict Keys and Values of default configuration
-        """
-        config = {}
-        for key in Configuration.keys():
-            config[key] = eval('DefaultConfiguration.' + key + '()')
-        return config
 
     @staticmethod
     def access_token():
