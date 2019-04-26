@@ -1,6 +1,6 @@
+import naas
 from naas.configuration import Configuration
 from naas.models.account import Account
-from naas.requests.accounts import Accounts
 
 
 class Accounts(object):
@@ -36,7 +36,7 @@ class Accounts(object):
         if params is None:
             params = {}
 
-        request = Accounts.retrieve(params)
+        request = naas.requests.Accounts.retrieve(params)
 
         if request:
             return Account(request.json().get('data'))

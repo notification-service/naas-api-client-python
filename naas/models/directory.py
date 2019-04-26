@@ -1,6 +1,4 @@
 import naas
-import requests
-
 from naas.models.links import Links
 
 

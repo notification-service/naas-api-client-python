@@ -1,8 +1,9 @@
+import naas
+
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
 from naas.models.subscriber_email_address import SubscriberEmailAddress
 from naas.models.error import Error
-from naas.requests.subscriber_email_addresses import SubscriberEmailAddresses
 
 
 class SubscriberEmailAddresses(object):
@@ -40,7 +41,7 @@ class SubscriberEmailAddresses(object):
         if params is None:
             params = {}
 
-        request = SubscriberEmailAddresses.list_by_subscriber_id(
+        request = naas.requests.SubscriberEmailAddresses.list_by_subscriber_id(
             subscriber_id, params)
 
         klass_attributes = []
@@ -64,7 +65,7 @@ class SubscriberEmailAddresses(object):
         if params is None:
             params = {}
 
-        request = SubscriberEmailAddresses.list(params)
+        request = naas.requests.SubscriberEmailAddresses.list(params)
 
         klass_attributes = []
 
@@ -87,7 +88,7 @@ class SubscriberEmailAddresses(object):
         if params is None:
             params = {}
 
-        request = SubscriberEmailAddresses.create(params)
+        request = naas.requests.SubscriberEmailAddresses.create(params)
 
         if request:
             return SubscriberEmailAddress(request.json().get('data'))
@@ -110,7 +111,7 @@ class SubscriberEmailAddresses(object):
         if params is None:
             params = {}
 
-        request = SubscriberEmailAddresses.retrieve(id, params)
+        request = naas.requests.SubscriberEmailAddresses.retrieve(id, params)
 
         if request:
             return SubscriberEmailAddress(request.json().get('data'))

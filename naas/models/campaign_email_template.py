@@ -1,5 +1,4 @@
 import datetime
-
 from naas.models.links import Links
 
 

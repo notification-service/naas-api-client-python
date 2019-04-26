@@ -1,6 +1,6 @@
+import naas
 from naas.configuration import Configuration
 from naas.models.email_notification_status import EmailNotificationStatus
-from naas.requests.email_notification_statuses import EmailNotificationStatuses
 
 
 class EmailNotificationStatuses(object):
@@ -36,7 +36,7 @@ class EmailNotificationStatuses(object):
         if params is None:
             params = {}
 
-        request = EmailNotificationStatuses.retrieve_by_email_notification_id(
+        request = naas.requests.EmailNotificationStatuses.retrieve_by_email_notification_id(
             email_notification_id, params)
 
         if request:

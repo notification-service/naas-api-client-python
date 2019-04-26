@@ -1,6 +1,6 @@
+import naas
 from naas.configuration import Configuration
 from naas.models.account_setting import AccountSetting
-from naas.requests.account_settings import AccountSettings
 
 
 class AccountSettings(object):
@@ -19,7 +19,7 @@ class AccountSettings(object):
 
         :return: AccountSetting
         """
-        request = AccountSettings.retrieve()
+        request = naas.requests.AccountSettings.retrieve()
         if request:
             response_data = request.json().get('data')
             return AccountSetting(response_data)

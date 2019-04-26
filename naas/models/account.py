@@ -1,5 +1,4 @@
 import iso8601
-
 from naas.models.links import Links
 from naas.models.account_setting import AccountSetting
 

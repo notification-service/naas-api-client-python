@@ -1,5 +1,5 @@
+import naas
 from naas.models.email_notification import EmailNotification
-from naas.requests.email_notification_basics import EmailNotificationBasics
 
 
 class EmailNotificationBasic(object):
@@ -26,7 +26,7 @@ class EmailNotificationBasic(object):
         :param options: dict
         :return: EmailNotification
         """
-        request = EmailNotificationBasics.create_from_attributes(
+        request = naas.requests.EmailNotificationBasics.create_from_attributes(
             email_address, project_id, campaign_id,
             campaign_email_template_id, content, options
         )

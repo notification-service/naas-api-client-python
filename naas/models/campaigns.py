@@ -1,8 +1,8 @@
+import naas
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
 from naas.models.campaign import Campaign
 from naas.models.error import Error
-from naas.requests.campaigns import Campaigns
 
 
 class Campaigns(object):
@@ -39,7 +39,8 @@ class Campaigns(object):
         if params is None:
             params = {}
 
-        request = Campaigns.list_by_project_id(project_id, params)
+        request = naas.requests.Campaigns.list_by_project_id(
+            project_id, params)
 
         klass_attributes = []
 
@@ -64,7 +65,8 @@ class Campaigns(object):
         if params is None:
             params = {}
 
-        request = Campaigns.retrieve_by_project_id(project_id, _id, params)
+        request = naas.requests.Campaigns.retrieve_by_project_id(
+            project_id, _id, params)
 
         if request:
             return Campaign(request.json().get('data'))
@@ -87,7 +89,8 @@ class Campaigns(object):
         if params is None:
             params = {}
 
-        request = Campaigns.create_by_project_id(project_id, params)
+        request = naas.requests.Campaigns.create_by_project_id(
+            project_id, params)
 
         if request:
             return Campaign(request.json().get('data'))
@@ -111,7 +114,8 @@ class Campaigns(object):
         if params is None:
             params = {}
 
-        request = Campaigns.update_by_project_id(project_id, _id, params)
+        request = naas.requests.Campaigns.update_by_project_id(
+            project_id, _id, params)
 
         if request:
             return Campaign(request.json().get('data'))
