@@ -21,7 +21,8 @@ class Links(object):
 
     def route_for(self, rel):
         """Returns the route for the link relationship"""
-        return next(filter(lambda r: r.rel() == rel, self))
+        return Link(
+            next(filter(lambda r: Link(r).rel() == rel, self.collection)))
 
     def next(self):
         if self.index == 0:
@@ -36,6 +37,6 @@ class Links(object):
         :return: Link
         """
         for record in self.collection:
-            if record.rel() == rel:
+            if Link(record).rel() == rel:
                 return record
         raise LinkNotFoundError
