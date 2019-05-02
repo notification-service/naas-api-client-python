@@ -21,7 +21,8 @@ class Links(object):
 
     def route_for(self, rel):
         """Returns the route for the link relationship"""
-        return Link(next(filter(lambda r: Link(r).rel() == rel, self)))
+        return Link(
+            next(filter(lambda r: Link(r).rel() == rel, self.collection)))
 
     def next(self):
         if self.index == 0:
