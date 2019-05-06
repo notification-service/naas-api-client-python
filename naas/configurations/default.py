@@ -95,7 +95,8 @@ class DefaultConfiguration:
         """
         return Logger(log_file=os.environ.get("NAAS_LOG_FILE"))
 
-    def connection_options(self):
+    @classmethod
+    def connection_options(cls):
         """
         Returns a set of default connection options.
         This will be deep merged with user-specified values
@@ -104,8 +105,8 @@ class DefaultConfiguration:
         """
         return {
             'headers': {
-                'accept': self.media_type(),
-                'user_agent': self.user_agent(),
-                'content_type': self.content_type()
+                'accept': cls.media_type(),
+                'user_agent': cls.user_agent(),
+                'content_type': cls.content_type()
             }
         }
