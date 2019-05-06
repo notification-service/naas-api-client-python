@@ -1,7 +1,6 @@
 import naas
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models.email_notification import EmailNotification
 from naas.models.error import Error
 
 
@@ -20,7 +19,7 @@ class EmailNotifications(object):
 
     def __iter__(self):
         """ Implement iterator """
-        return map(lambda r: EmailNotification(r), self.collection)
+        return map(lambda r: naas.models.EmailNotification(r), self.collection)
 
     @staticmethod
     def deliver(_id, params=None):
@@ -87,7 +86,7 @@ class EmailNotifications(object):
         request = naas.requests.EmailNotifications.retrieve(_id, params)
 
         if request:
-            return EmailNotification(request.json().get('data'))
+            return naas.models.EmailNotification(request.json().get('data'))
         elif request.status_code == 404:
             raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
@@ -113,7 +112,7 @@ class EmailNotifications(object):
         request = naas.requests.EmailNotifications.create(params)
 
         if request:
-            return EmailNotification(request.json().get('data'))
+            return naas.models.EmailNotification(request.json().get('data'))
 
         error = Error(request.json().get('data'))
         failure_message = (
