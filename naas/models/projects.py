@@ -8,6 +8,7 @@ from naas.models.error import Error
 class Projects(object):
     def __init__(self, collection):
         self.collection = list(collection)
+        self.index = len(collection)
 
     def __iter__(self):
         """ Implement iterator """
@@ -19,8 +20,8 @@ class Projects(object):
         self.index = self.index - 1
         return self.collection[self.index]
 
-    @staticmethod
-    def list(params=None):
+    @classmethod
+    def list(cls, params=None):
         """
         Helper method to retrieve from the request
         :param params: dict
@@ -36,8 +37,11 @@ class Projects(object):
         if request:
             klass_attributes = request.json().get('data')
         else:
-            Configuration.logger.error(
-                "Failure retrieving the projects {request.status_code}"
+            Configuration(
+                {
+                    "logger": ("Failure retrieving the projects "
+                               f"{request.status_code}")
+                }
             )
         return cls(klass_attributes)
 
@@ -60,8 +64,8 @@ class Projects(object):
             raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
-        Configuration.logger.error(
-            "Failure retrieving the project {request.status_code}"
+        Configuration(
+            {"logger": f"Failure retrieving the projects {request.status_code}"}
         )
 
     @staticmethod
@@ -83,5 +87,5 @@ class Projects(object):
         failure_message = (
             f"Failure creating the record {error.full_messages}")
 
-        Configuration.logger.error(failure_message)
+        Configuration({"logger": f"failure_message"})
         raise InvalidRequestError(failure_message)

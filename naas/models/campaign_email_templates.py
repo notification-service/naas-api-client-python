@@ -29,7 +29,8 @@ class CampaignEmailTemplates(object):
         return self.collection[self.index]
 
     @classmethod
-    def list_by_project_id_and_campaign_id(project_id, campaign_id, params=None):
+    def list_by_project_id_and_campaign_id(
+            cls, project_id, campaign_id, params=None):
         """
         Helper method to retrieve from the request
         :param project_id: str
@@ -48,12 +49,17 @@ class CampaignEmailTemplates(object):
         if request:
             klass_attributes = request.json().get('data')
         else:
-            Configuration.logger.error(
-                "Failure retrieving the email templates {request.status_code}")
+            Configuration(
+                {
+                    "logger": ("Failure retrieving the email templates "
+                               f"{request.status_code}")
+                }
+            )
         return cls(klass_attributes)
 
     @staticmethod
-    def retrieve_by_project_id_and_campaign_id(project_id, campaign_id, _id, params=None):
+    def retrieve_by_project_id_and_campaign_id(
+            project_id, campaign_id, _id, params=None):
         """
         Helper method to retrieve from the request
         :param project_id: str
@@ -75,8 +81,12 @@ class CampaignEmailTemplates(object):
             raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
-        Configuration.logger.error(
-            f"Failure retrieving the email template {request.status_code}")
+        Configuration(
+            {
+                "logger": ("Failure retrieving the email template "
+                           f"{request.status_code}")
+            }
+        )
 
     @staticmethod
     def create_by_project_id_and_campaign_id(project_id, campaign_id, params=None):
@@ -98,5 +108,5 @@ class CampaignEmailTemplates(object):
         failure_message = (
             f"Failure creating the record {error.full_messages}")
 
-        Configuration.logger.error(failure_message)
+        Configuration({"logger": f"{failure_message}"})
         raise InvalidRequestError(failure_message)

@@ -1,4 +1,5 @@
 import naas
+from naas.configuration import Configuration
 from naas.models.email_notification import EmailNotification
 
 
@@ -21,7 +22,7 @@ class EmailNotificationBasic(object):
         :param email_address: str
         :param project_id
         :param campaign_id str
-        :paramcampaign_email_template_id
+        :param campaign_email_template_id
         :param content: dict
         :param options: dict
         :return: EmailNotification
@@ -34,6 +35,9 @@ class EmailNotificationBasic(object):
         if request:
             return EmailNotification(request.json().get('data'))
 
-        Configuration.logger.error(
-            "Failure retrieving the email notification {request.status_code}"
+        Configuration(
+            {
+                "logger": ("Failure retrieving the email "
+                           f"notification {request.status_code}")
+            }
         )

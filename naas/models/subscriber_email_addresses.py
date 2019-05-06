@@ -30,7 +30,7 @@ class SubscriberEmailAddresses(object):
         return self.collection[self.index]
 
     @classmethod
-    def list_by_subscriber_id(subscriber_id, params=None):
+    def list_by_subscriber_id(cls, subscriber_id, params=None):
         """
         Helper method to retrieve from the request
         :param _id: str
@@ -49,14 +49,16 @@ class SubscriberEmailAddresses(object):
         if request:
             klass_attributes = request.json().get('data')
         else:
-            Configuration.logger.error(
-                "Failure retrieving the subscriber email addresses "
-                f"{request.status_code}"
+            Configuration(
+                {
+                    "logger": ("Failure retrieving the subscriber "
+                               f"email addresses  {request.status_code}")
+                }
             )
         return cls(klass_attributes)
 
-    @staticmethod
-    def list(params=None):
+    @classmethod
+    def list(cls, params=None):
         """
         Helper method to retrieve from the request
         :param params: dict
@@ -72,9 +74,11 @@ class SubscriberEmailAddresses(object):
         if request:
             klass_attributes = request.json().get('data')
         else:
-            Configuration.logger.error(
-                "Failure retrieving the subscriber email addresses "
-                f"{request.status_code}"
+            Configuration(
+                {
+                    "logger": ("Failure retrieving the subscriber email addresses "
+                               f"{request.status_code}")
+                }
             )
         return cls(klass_attributes)
 
@@ -97,7 +101,7 @@ class SubscriberEmailAddresses(object):
         failure_message = (
             f"Failure creating the record {error.full_messages}")
 
-        Configuration.logger.error(failure_message)
+        Configuration({"logger": f"{failure_message}"})
         raise InvalidRequestError(failure_message)
 
     @staticmethod
@@ -119,7 +123,9 @@ class SubscriberEmailAddresses(object):
             raise RecordNotFoundError(f"Could not find record with id {id}")
             return
 
-        Configuration.logger.error(
-            "Failure retrieving the subscriber email address "
-            f"{request.status_code}"
+        Configuration(
+            {
+                "logger": ("Failure retrieving the subscriber email address "
+                           f"{request.status_code}")
+            }
         )

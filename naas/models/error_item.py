@@ -24,4 +24,4 @@ class ErrorItem(object):
 
     def full_message(self):
         """Returns the fully formatted message"""
-        return self.message
+        return self.message()

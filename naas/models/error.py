@@ -31,4 +31,5 @@ class Error(object):
 
     def full_messages(self):
         """Delegate to the error for full messages"""
-        return self.errors.full_messages
+        errors = self.errors()
+        return errors.full_messages()

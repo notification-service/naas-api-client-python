@@ -2,6 +2,7 @@ import iso8601
 import naas
 
 from naas.models import Links
+from naas.models.email_notifications import EmailNotifications
 from naas.models.email_notification_statuses import EmailNotificationStatuses
 from naas.models.email_notification_deliveries import EmailNotificationDeliveries
 
@@ -35,7 +36,7 @@ class EmailNotification(object):
                 self.id)
         return status
 
-    def email_notification_deliveries(params={}):
+    def email_notification_deliveries(self, params={}):
         """Returns the Email Notification Deliveries"""
         if self.email_notification_deliveries_attributes():
             return EmailNotificationDeliveries(
