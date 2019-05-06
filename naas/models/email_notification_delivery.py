@@ -62,7 +62,7 @@ class EmailNotificationDelivery(object):
     def duration(self):
         """Returns the duration of processing time"""
         if self.is_started() and self.is_completed():
-            return (self.completed_at() - self.started_at())
+            return self.completed_at() - self.started_at()
         return 0
 
     def duration_display(self):

@@ -28,4 +28,4 @@ class Pagination(object):
 
     def total_pages(self):
         """Returns the total number of pages"""
-        return (self.total() / self.per_page())
+        return self.total() / self.per_page()

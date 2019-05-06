@@ -27,7 +27,7 @@ class EmailNotificationDeliveries(object):
         return self.collection[self.index]
 
     @classmethod
-    def list_by_email_notification_id(email_notification_id, params=None):
+    def list_by_email_notification_id(cls, email_notification_id, params=None):
         """
         Helper method to retrieve from the request
         :param email_notification_id: str
@@ -45,9 +45,11 @@ class EmailNotificationDeliveries(object):
         if klass_attributes:
             klass_attributes = request.json().get('data')
         else:
-            Configuration.logger.error(
-                "Failure retrieving the email notification "
-                f"deliveries {request.status_code}"
+            Configuration(
+                {
+                    "logger": ("Failure retrieving the email notification "
+                               f"deliveries {request.status_code}")
+                }
             )
         return cls(klass_attributes)
 
@@ -69,7 +71,9 @@ class EmailNotificationDeliveries(object):
         if request:
             return EmailNotificationDelivery(request.json().get('data'))
 
-        configuration.logger.error(
-            "Failure retrieving the email notification delivery "
-            f"{request.status_code}"
+        Configuration(
+            {
+                "logger": ("Failure retrieving the email notification delivery "
+                           f"{request.status_code}")
+            }
         )

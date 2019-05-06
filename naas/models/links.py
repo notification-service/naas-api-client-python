@@ -30,7 +30,7 @@ class Links(object):
         self.index = self.index - 1
         return self.collection[self.index]
 
-    def find_by_rel(rel):
+    def find_by_rel(self, rel):
         """
         Find the link by its relationship
         :raises LinkNotFoundError

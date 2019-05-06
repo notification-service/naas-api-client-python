@@ -24,6 +24,9 @@ class AccountSettings(object):
             response_data = request.json().get('data')
             return AccountSetting(response_data)
 
-        Configuration.logger.error(
-            f"Failure retrieving the account settings {request.status_code}"
+        Configuration(
+            {
+                "logger": ("Failure retrieving the account settings "
+                           f"{request.status_code}")
+            }
         )

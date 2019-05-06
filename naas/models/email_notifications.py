@@ -35,16 +35,21 @@ class EmailNotifications(object):
         request = naas.requests.EmailNotifications.deliver(_id, params)
 
         if request:
-            Configuration.logger.info(
-                f"Delivered email notification {request.status_code}")
+            Configuration(
+                {
+                    "logger": f"Delivered email notification {request.status_code}"
+                }
+            )
         else:
-            Configuration.logger.info(
-                "Failure delivering the email notification "
-                f"{request.status_code}"
+            Configuration(
+                {
+                    "logger": ("Failure delivering the email notification "
+                               f"{request.status_code}")
+                }
             )
 
     @classmethod
-    def list(params=None):
+    def list(cls, params=None):
         """
         Helper method to retrieve from the request
         :param params: dict
@@ -59,9 +64,11 @@ class EmailNotifications(object):
         if request:
             klass_attributes = request.json().get('data')
         else:
-            Configuration.logger.error(
-                "Failure retrieving the email notifications "
-                f"{request.status_code}"
+            Configuration(
+                {
+                    "logger": ("Failure retrieving the email notifications "
+                               f"{request.status_code}")
+                }
             )
         return cls(klass_attributes)
 
@@ -85,8 +92,12 @@ class EmailNotifications(object):
             raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
-        Configuration.logger.error(
-            f"Failure retrieving the email notification {request.status_code}")
+        Configuration(
+            {
+                "logger": ("Failure retrieving the email notification "
+                           f"{request.status_code}")
+            }
+        )
 
     @staticmethod
     def create(params=None):
@@ -108,5 +119,5 @@ class EmailNotifications(object):
         failure_message = (
             f"Failure creating the record {error.full_messages}")
 
-        Configuration.logger.error(failure_message)
+        Configuration({"logger": f"{failure_message}"})
         raise InvalidRequestError(failure_message)

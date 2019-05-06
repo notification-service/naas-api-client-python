@@ -28,8 +28,8 @@ class Subscribers(object):
         self.index = self.index - 1
         return self.collection[self.index]
 
-    @staticmethod
-    def list(params=None):
+    @classmethod
+    def list(cls, params=None):
         """
         Helper method to retrieve from the request
         :param params: dict
@@ -45,8 +45,8 @@ class Subscribers(object):
         if request:
             klass_attributes = request.json().get('data')
         else:
-            Configuration.logger.error(
-                "Failure retrieving the subscribers {request.status_code}"
+            Configuration(
+                {"logger": f"Failure retrieving the subscribers {request.status_code}"}
             )
         return cls(klass_attributes)
 
@@ -69,8 +69,8 @@ class Subscribers(object):
             raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
-        Configuration.logger.error(
-            "Failure retrieving the subscribern {request.status_code}"
+        Configuration(
+            {"logger": f"Failure retrieving the subscriber {request.status_code}"}
         )
 
     @staticmethod
@@ -89,8 +89,7 @@ class Subscribers(object):
             return Subscriber(request.json().get('data'))
 
         error = Error(request.json().get('data'))
-        failure_message = (
-            f"Failure creating the record {error.full_messages}")
+        failure_message = f"Failure creating the record {error.full_messages}"
 
-        Configuration.logger.error(failure_message)
+        Configuration({"logger": f"{failure_message}"})
         raise InvalidRequestError(failure_message)

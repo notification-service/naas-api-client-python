@@ -26,10 +26,11 @@ class EmailNotificationStatuses(object):
         self.index = self.index - 1
         return self.collection[self.index]
 
+    @staticmethod
     def retrieve_by_email_notification_id(email_notification_id, params=None):
         """
         Helper method to retrieve from the request
-        :param email_notification_id,: str
+        :param email_notification_id: str
         :param params: dict
         :return: EmailNotificationStatus
         """
@@ -42,7 +43,9 @@ class EmailNotificationStatuses(object):
         if request:
             return EmailNotificationStatus(request.json().get('data'))
 
-        Configuration.logger.error(
-            f"Failure retrieving the email notification "
-             "status {request.status_code}"
+        Configuration(
+            {
+                "logger": (f"Failure retrieving the email notification "
+                           "status {request.status_code}")
+            }
         )

@@ -41,5 +41,9 @@ class Accounts(object):
         if request:
             return Account(request.json().get('data'))
 
-        Configuration.logger.error(
-            f"Failure retrieving the account {request.status_code}")
+        Configuration(
+            {
+                "logger": ("Failure retrieving the account "
+                           f"{request.status_code}")
+            }
+        )
