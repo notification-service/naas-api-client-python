@@ -1,3 +1,4 @@
+import json
 from naas.client import Client
 
 
@@ -55,7 +56,8 @@ class Subscriber:
         rel = Client.rel_for('rels/subscribers')
         route = Client.routes().route_for(rel)
         url = route.url_for()
-        request = Client.post(url, headers=headers, data=request_body)
+        request = Client.post(
+            url, headers=headers, data=json.dumps(request_body))
         return request
 
     @classmethod
@@ -78,5 +80,6 @@ class Subscriber:
         rel = Client.rel_for('rels/subscriber')
         route = Client.routes().route_for(rel)
         url = route.url_for(args={**params, **{'id': _id}})
-        request = Client.put(url, headers=headers, data=request_body)
+        request = Client.put(
+            url, headers=headers, data=json.dumps(request_body))
         return request

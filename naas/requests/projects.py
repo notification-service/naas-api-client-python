@@ -1,3 +1,4 @@
+import json
 from naas.client import Client
 
 
@@ -30,7 +31,7 @@ class Projects:
         """
         if params is None:
             params = {}
-        rel = Client.rel_for('rels/projects')
+        rel = Client.rel_for('rels/project')
         route = Client.routes().route_for(rel)
         url = route.url_for(args={**params, **{'id': _id}})
         request = Client.get(url)
@@ -55,7 +56,8 @@ class Projects:
         rel = Client.rel_for('rels/projects')
         route = Client.routes().route_for(rel)
         url = route.url_for()
-        request = Client.post(url, headers=headers, data=request_body)
+        request = Client.post(
+            url, headers=headers, data=json.dumps(request_body))
         return request
 
     @staticmethod
@@ -78,5 +80,6 @@ class Projects:
         rel = Client.rel_for('rels/project')
         route = Client.routes().route_for(rel)
         url = route.url_for(args={**params, **{'id': _id}})
-        request = Client.put(url, headers=headers, data=request_body)
+        request = Client.put(
+            url, headers=headers, data=json.dumps(request_body))
         return request

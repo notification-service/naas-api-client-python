@@ -1,3 +1,4 @@
+import json
 from naas.client import Client
 
 
@@ -49,10 +50,14 @@ class SubscriberEmailAddresses:
         request_body = {
             "subscriber_email_address": params
         }
+        request_headers = {
+            "Content-Type": "application/json"
+        }
         rel = Client.rel_for('rels/subscriber-email-addresses')
         route = Client.routes().route_for(rel)
         url = route.url_for()
-        request = Client.post(url, data=request_body)
+        request = Client.post(
+            url, headers=request_headers, data=json.dumps(request_body))
         return request
 
     @staticmethod
