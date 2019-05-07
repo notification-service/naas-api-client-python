@@ -1,3 +1,4 @@
+import json
 from naas.client import Client
 
 
@@ -16,10 +17,14 @@ class EmailNotificationBasics:
         request_body = {
             "email_notification_basic": params
         }
+        request_headers = {
+            "Content-Type": "application/json"
+        }
         rel = Client.rel_for('rels/email-notification-basic')
         route = Client.routes().route_for(rel)
         url = route.url_for()
-        request = Client.post(url, data=request_body)
+        request = Client.post(
+            url, headers=request_headers, data=json.dumps(request_body))
         return request
 
     @classmethod
