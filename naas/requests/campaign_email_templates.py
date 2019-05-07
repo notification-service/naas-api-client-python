@@ -1,3 +1,4 @@
+import json
 from naas.client import Client
 
 
@@ -67,11 +68,15 @@ class CampaignEmailTemplates:
         request_body = {
             "campaign_email_template": params
         }
+        request_headers = {
+            "Content-Type": "application/json"
+        }
         rel = Client.rel_for('rels/projects')
         route = Client.routes().route_for(rel)
         url = route.url_for(args={
             **params, **{'project_id': project_id, 'campaign_id': campaign_id}
         })
 
-        request = Client.post(url, data=request_body)
+        request = Client.post(
+            url, headers=request_headers, data=json.dumps(request_body))
         return request

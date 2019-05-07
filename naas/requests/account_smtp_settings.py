@@ -1,3 +1,4 @@
+import json
 from naas.client import Client
 from naas.errors import RecordNotFoundError
 
@@ -56,8 +57,12 @@ class AccountSmtpSettings:
         request_body = {
             "smtp_settings": params
         }
+        request_headers = {
+            "Content-Type": "application/json"
+        }
         rel = Client.rel_for('rels/smtp-settings')
         route = Client.routes().route_for(rel)
         url = route.url_for()
-        request = Client.post(url, data=request_body)
+        request = Client.post(
+            url, headers=request_headers, data=json.dumps(request_body))
         return request
