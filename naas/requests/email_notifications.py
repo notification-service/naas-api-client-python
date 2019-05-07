@@ -1,3 +1,4 @@
+import json
 from naas.client import Client
 
 
@@ -50,10 +51,14 @@ class EmailNotifications:
         request_body = {
             "email_notification": params
         }
+        request_headers = {
+            "Content-Type": "application/json"
+        }
         rel = Client.rel_for('rels/email-notification')
         route = Client.routes().route_for(rel)
         url = route.url_for(args={**params, **{'id': _id}})
-        request = Client.put(url, data=request_body)
+        request = Client.put(
+            url, headers=request_headers, data=json.dumps(request_body))
         return request
 
     @staticmethod
@@ -69,10 +74,14 @@ class EmailNotifications:
         request_body = {
             "email_notification": params
         }
+        request_headers = {
+            "Content-Type": "application/json"
+        }
         rel = Client.rel_for('rels/email-notifications')
         route = Client.routes().route_for(rel)
         url = route.url_for()
-        request = Client.post(url, data=request_body)
+        request = Client.post(
+            url, headers=request_headers, data=json.dumps(request_body))
         return request
 
     @staticmethod
