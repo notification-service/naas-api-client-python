@@ -71,7 +71,7 @@ class CampaignEmailTemplates:
         request_headers = {
             "Content-Type": "application/json"
         }
-        rel = Client.rel_for('rels/projects')
+        rel = Client.rel_for('rels/project-campaign-campaign-email-templates')
         route = Client.routes().route_for(rel)
         url = route.url_for(args={
             **params, **{'project_id': project_id, 'campaign_id': campaign_id}
