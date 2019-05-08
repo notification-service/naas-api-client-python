@@ -106,7 +106,7 @@ class CampaignEmailTemplates(object):
 
         error = Error(request.json().get('data'))
         failure_message = (
-            f"Failure creating the record {error.full_messages}")
+            f"Failure creating the record {error.full_messages()}")
 
         Configuration({"logger": f"{failure_message}"})
         raise InvalidRequestError(failure_message)
