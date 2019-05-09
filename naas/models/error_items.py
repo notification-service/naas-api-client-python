@@ -28,4 +28,5 @@ class ErrorItems(object):
         """
         Returns the full messages as a string
         """
-        return ', '.join([record.full_message() for record in self.collection])
+        return ', '.join(
+            [ErrorItem(record).full_message() for record in self.collection])

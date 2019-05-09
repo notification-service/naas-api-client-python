@@ -27,7 +27,7 @@ class Error(object):
 
     def errors(self):
         """Returns the collection of ErrorItems"""
-        return ErrorItems(self.errors_attributes)
+        return ErrorItems(self.errors_attributes())
 
     def full_messages(self):
         """Delegate to the error for full messages"""
