@@ -19,21 +19,21 @@ class EmailNotification(object):
     def __init__(self, attributes={}):
         self.attributes = attributes
 
-    def id(self):
+    def _id(self):
         """Returns the subscriber id"""
         return self.attributes.get('id')
 
     def deliver(self):
         """Deliver for this instance"""
-        return EmailNotifications.deliver(self.id)
+        return EmailNotifications.deliver(self._id())
 
     def delivery_status(self):
         """Returns the delivery status"""
         status = naas.requests.EmailNotificationStatuses.retrieve_by_email_notification_id(
-            self.id)
+            self._id())
         if status:
             return EmailNotificationStatuses.retrieve_by_email_notification_id(
-                self.id)
+                self._id())
         return status
 
     def email_notification_deliveries(self, params={}):
@@ -42,7 +42,7 @@ class EmailNotification(object):
             return EmailNotificationDeliveries(
                 self.email_notification_deliveries_attributes())
         return EmailNotificationDeliveries.list_by_email_notification_id(
-            self.id, params)
+            self._id(), params)
 
     def email_notification_deliveries_count(self):
         """Returns the count of the email notification deliveries"""
