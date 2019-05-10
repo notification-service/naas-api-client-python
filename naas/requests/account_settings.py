@@ -34,7 +34,7 @@ class AccountSettings:
         headers = {
             'Content-Type': 'application/json'
         }
-        rel = Client.rel_for('rels/project')
+        rel = Client.rel_for('rels/account-settings')
         route = Client.routes().route_for(rel)
         url = route.url_for()
         request = Client.put(
