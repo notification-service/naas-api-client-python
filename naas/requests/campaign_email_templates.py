@@ -33,7 +33,7 @@ class CampaignEmailTemplates:
 
         :param project_id: str
         :param campaign_id: str
-        :param id: int
+        :param _id: int
         :param params: dict
         :return: Response
         """
