@@ -21,6 +21,12 @@ class EmailNotifications(object):
         """ Implement iterator """
         return map(lambda r: naas.models.EmailNotification(r), self.collection)
 
+    def next(self):
+        if self.index == 0:
+            raise StopIteration
+        self.index = self.index - 1
+        return self.collection[self.index]
+
     @staticmethod
     def deliver(_id, params=None):
         """
