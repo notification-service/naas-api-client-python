@@ -38,7 +38,7 @@ class Subscribers(object):
         if params is None:
             params = {}
 
-        request = naas.requests.Subscribers.list(params)
+        request = naas.requests.Subscriber.list(params)
 
         klass_attributes = []
 
@@ -61,7 +61,7 @@ class Subscribers(object):
         if params is None:
             params = {}
 
-        request = naas.requests.Subscribers.retrieve(_id, params)
+        request = naas.requests.Subscriber.retrieve(_id, params)
 
         if request:
             return Subscriber(request.json().get('data'))
@@ -83,7 +83,7 @@ class Subscribers(object):
         if params is None:
             params = {}
 
-        request = naas.requests.Subscribers.create(params)
+        request = naas.requests.Subscriber.create(params)
 
         if request:
             return Subscriber(request.json().get('data'))
