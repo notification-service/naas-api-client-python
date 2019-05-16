@@ -107,3 +107,41 @@ class TestRequestsCampaigns(BaseTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()['data']['name'],
                          params_campaign['name'])
+
+    def test_update_by_project_id_invalid_project_id_invalid_id_fails(self):
+        response = Campaigns.update_by_project_id(
+            "invalid_project_id", "invalid_campaign_id")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.json()['message'], 'Not Found')
+
+    def test_update_by_project_id_valid_project_id_invalid_id_fails(self):
+        params_project = {
+            'name': 'My Initial Project',
+            'description': 'My initial description'
+        }
+        response_project = Projects.create(params_project)
+        project_created = response_project.json()['data']
+
+        response = Campaigns.update_by_project_id(
+            project_created['id'], "invalid_campaign_id")
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.json()['message'], 'Not Found')
+
+    def test_update_by_project_id_successful(self):
+        params_project = {
+            'name': 'My Initial Project',
+            'description': 'My initial description'
+        }
+        params_campaign = {'name': 'testing', 'description': 'My description'}
+        response_project = Projects.create(params_project)
+        project_created = response_project.json()['data']
+        response_campaign = Campaigns.create_by_project_id(
+            project_created['id'], params_campaign)
+        campaign_created = response_campaign.json()['data']
+        update_data = {
+            'name': 'testing campaign'
+        }
+        response = Campaigns.update_by_project_id(
+            project_created['id'], campaign_created['id'], update_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['data']['name'], update_data['name'])
