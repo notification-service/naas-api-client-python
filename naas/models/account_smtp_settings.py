@@ -1,18 +1,26 @@
 import naas
 from naas.configuration import Configuration
 from naas.errors import InvalidRequestError, RecordNotFoundError
-from naas.models.project import Project
+from naas.models.account_smtp_setting import AccountSmtpSetting
 from naas.models.error import Error
 
 
-class Projects(object):
+class AccountSmtpSettings(object):
+    """
+
+    Account Smtp Settings
+    ===============
+
+    This returns an instance of the account smtp settings domain model
+    """
+
     def __init__(self, collection):
         self.collection = list(collection)
-        self.index = len(collection)
+        self.index = len(self.collection)
 
     def __iter__(self):
         """ Implement iterator """
-        return map(lambda r: Project(r), self.collection)
+        return map(lambda r: AccountSmtpSetting(r), self.collection)
 
     def next(self):
         if self.index == 0:
@@ -24,14 +32,12 @@ class Projects(object):
     def list(cls, params=None):
         """
         Helper method to retrieve from the request
-        :param params: dict
-        :return: Projects
+        :param params: dict Attributes
+        :return: AccountSmtpSettings
         """
         if params is None:
             params = {}
-
-        request = naas.requests.Projects.list(params)
-
+        request = naas.requests.AccountSmtpSettings.list(params)
         klass_attributes = []
 
         if request:
@@ -39,7 +45,7 @@ class Projects(object):
         else:
             Configuration(
                 {
-                    "logger": ("Failure retrieving the projects "
+                    "logger": ("Failure retrieving the smtp settings "
                                f"{request.status_code}")
                 }
             )
@@ -51,41 +57,46 @@ class Projects(object):
         Helper method to retrieve from the request
         :param _id: str
         :param params: dict
-        :return: Project
+        :raises RecordNotFoundError
+        :return: AccountSmtpSetting
         """
         if params is None:
             params = {}
 
-        request = naas.requests.Projects.retrieve(_id, params)
+        request = naas.requests.AccountSmtpSettings.retrieve(_id, params)
 
         if request:
-            return Project(request.json().get('data'))
+            return AccountSmtpSetting(request.json().get('data'))
         elif request.status_code == 404:
             raise RecordNotFoundError(f"Could not find record with id {_id}")
             return
 
         Configuration(
-            {"logger": f"Failure retrieving the projects {request.status_code}"}
+            {
+                "logger": ("Failure retrieving the smtp setting "
+                           f"{request.status_code}")
+            }
         )
 
     @staticmethod
     def create(params=None):
         """
-        Create a new project
+        Create a new SMTP setting
         :param params: dict
-        :return: Project
+        :raises InvalidRequestError
+        :return: AccountSmtpSetting
         """
         if params is None:
             params = {}
 
-        request = naas.requests.Projects.create(params)
+        request = naas.requests.AccountSmtpSettings.create(params)
 
         if request:
-            return Project(request.json().get('data'))
+            return AccountSmtpSetting(request.json().get('data'))
 
         error = Error(request.json().get('data'))
         failure_message = (
             f"Failure creating the record {error.full_messages()}")
 
-        Configuration({"logger": f"failure_message"})
+        Configuration({"logger": f"{failure_message}"})
         raise InvalidRequestError(failure_message)
