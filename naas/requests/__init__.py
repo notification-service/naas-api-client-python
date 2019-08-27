@@ -16,6 +16,7 @@ from naas.requests.data_types import DataTypes
 from naas.requests.directory import Directory
 from naas.requests.projects import Projects
 from naas.requests.project_properties import ProjectProperties
+from naas.requests.project_subscribers import ProjectSubscribers
 from naas.requests.subscriber_email_addresses import SubscriberEmailAddresses
 from naas.requests.subscribers import Subscriber
 from naas.requests.email_notification_basics import EmailNotificationBasics
