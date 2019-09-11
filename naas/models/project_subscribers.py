@@ -31,13 +31,19 @@ COLUMNS = ['ID', 'Project ID', 'Subscriber ID', 'Email Addresses', 'Code',
         return self.collection[self.index]
 
     def headings(self):
-        pass
-
-    def headings(cls):
-        pass
+        """
+        Helper to retrieve the headings collection
+        """
+        return self.COLUMNS
 
     @classmethod
     def list_by_project_id(cls, project_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param params: dict
+        :return: ProjectSubscribers
+        """
         if not params:
             params = {}
 
@@ -59,6 +65,14 @@ COLUMNS = ['ID', 'Project ID', 'Subscriber ID', 'Email Addresses', 'Code',
 
     @staticmethod
     def retrieve_by_project_id(project_id, _id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param _id: str
+        :param params: dict
+        :raises RecordNotFoundError
+        :return: ProjectSubscriber
+        """
         if not params:
             params = {}
 
@@ -80,6 +94,13 @@ COLUMNS = ['ID', 'Project ID', 'Subscriber ID', 'Email Addresses', 'Code',
 
     @staticmethod
     def create_by_project_id(project_id, params=None):
+        """
+        Create a new project subscriber
+        :param project_id: str
+        :param params: dict
+        :raises InvalidRequestError
+        :return: ProjectSubscriber
+        """
         if not params:
             params = {}
 
@@ -97,4 +118,7 @@ COLUMNS = ['ID', 'Project ID', 'Subscriber ID', 'Email Addresses', 'Code',
         raise InvalidRequestError(failure_message)
 
     def to_a(self):
-        pass
+        """
+        Returns the collection serialized as an array
+        """
+        return list(self.collection)

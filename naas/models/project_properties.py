@@ -30,13 +30,19 @@ class ProjectProperties(object):
         return self.collection[self.index]
 
     def headings(self):
-        pass
-
-    def headings(cls):
-        pass
+        """
+        Helper to retrieve the headings collection
+        """
+        return self.COLUMNS
 
     @classmethod
     def list_by_project_id(cls, project_id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param params: dict
+        :return: ProjectProperties
+        """
         if not params:
             params = {}
 
@@ -58,6 +64,14 @@ class ProjectProperties(object):
 
     @staticmethod
     def retrieve_by_project_id(project_id, _id, params=None):
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param _id: str
+        :param params: dict
+        :raises RecordNotFoundError
+        :return: ProjectProperties
+        """
         if not params:
             params = {}
 
@@ -79,6 +93,13 @@ class ProjectProperties(object):
 
     @staticmethod
     def create_by_project_id(project_id, params=None):
+        """
+        Create a new project property
+        :param project_id: str
+        :param params: dict
+        :raises InvalidRequestError
+        :return: ProjectProperty
+        """
         if not params:
             params = {}
 
@@ -97,6 +118,13 @@ class ProjectProperties(object):
 
     @staticmethod
     def update_by_project_id(project_id, _id, params=None):
+        """
+        Update an existing project property
+        :param project_id: str
+        :param _id: str
+        :param params: dict
+        :return: ProjectProperty
+        """
         if not params:
             params = {}
 
@@ -114,10 +142,27 @@ class ProjectProperties(object):
         raise InvalidRequestError(failure_message)
 
     def to_a(self):
-        pass
+        """
+        Returns the collection serialized as an array
+        """
+        return list(self.collection)
 
     def subscriber_viewable(self):
-        pass
+        """
+        Returns only the subscriber viewable
+        """
+        viewable = []
+        for project_property in self.collection:
+            if project_property.is_subscriber_viewable():
+                viewable.append(project_property)
+        return viewable
 
     def subscriber_editable(self):
-        pass
+        """
+        Returns only the subscriber editable
+        """
+        editable = []
+        for project_property in self.collection:
+            if project_property.is_subscriber_editable():
+                viewable.append(project_property)
+        return editable

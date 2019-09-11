@@ -24,7 +24,13 @@ class ProjectSubscriberProfile(object):
     @classmethod
     def retrieve_by_project_id_and_project_subscriber_id(
             cls, project_id, project_subscriber_id, params=None):
-
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param project_subscriber_id: str
+        :param params: dict
+        :return: ProjectSubscriberProfile
+        """
         if not params:
             params = {}
 
@@ -48,7 +54,13 @@ class ProjectSubscriberProfile(object):
     @classmethod
     def update_by_project_id_and_project_subscriber_id(
             cls, project_id, project_subscriber_id, params=None):
-
+        """
+        Update an existing project subscriber profile
+        :param project_id: str
+        :param project_subscriber_id: str
+        :param params: dict
+        :return: ProjectSubscriberProfile
+        """
         if not params:
             params = {}
 

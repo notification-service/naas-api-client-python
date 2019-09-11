@@ -30,7 +30,13 @@ class ProjectSubscriberProperties(object):
     @classmethod
     def list_by_project_id_and_project_subscriber_id(
             cls, project_id, project_subscriber_id, params=None):
-
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param project_subscriber_id: str
+        :param params: dict
+        :return: ProjectSubscriberProperties
+        """
         if params is None:
             params = {}
 
@@ -50,7 +56,14 @@ class ProjectSubscriberProperties(object):
     @staticmethod
     def retrieve_by_project_id_and_project_subscriber_id(
             project_id, project_subscriber_id, _id, params=None):
-
+        """
+        Helper method to retrieve from the request
+        :param project_id: str
+        :param project_subscriber_id: str
+        :param _id: str
+        :param params: dict
+        :return: ProjectSubscriberProperty
+        """
         if params is None:
             params = {}
 
@@ -70,6 +83,14 @@ class ProjectSubscriberProperties(object):
     @staticmethod
     def create_by_project_id_and_project_subscriber_id(
             project_id, project_subscriber_id, params=None):
+        """
+        Create a new project subscriber property
+        :param project_id: str
+        :param project_subscriber_id: str
+        :param params: dict
+        :raises InvalidRequestError
+        :return: ProjectSubscriberProperty
+        """
 
         if params is None:
             params = {}
@@ -90,7 +111,15 @@ class ProjectSubscriberProperties(object):
     @staticmethod
     def update_by_project_id_and_project_subscriber_id(
             project_id, project_subscriber_id, _id, params=None):
-
+        """
+        Update an existing project subscriber property
+        :param project_id: str
+        :param project_subscriber_id: str
+        :param _id: str
+        :param params: dict
+        :raises InvalidRequestError
+        :return: ProjectSubscriberProperty
+        """
         if params is None:
             params = {}
 

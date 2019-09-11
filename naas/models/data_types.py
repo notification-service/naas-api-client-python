@@ -27,7 +27,11 @@ class DataTypes(object):
 
     @classmethod
     def list(cls, params=None):
-
+        """
+        Helper method to retrieve from the request
+        :param params: dict
+        :return: DataTypes
+        """
         if not params:
             params = {}
 
@@ -48,6 +52,13 @@ class DataTypes(object):
 
     @staticmethod
     def retrieve(_id, params):
+        """
+        Helper method to retrieve from the request
+        :param _id: str
+        :param params: dict
+        :raises RecordNotFoundError
+        :return: DataType
+        """
         if not params:
             params = {}
 
@@ -67,7 +78,13 @@ class DataTypes(object):
         )
 
     def to_a(self):
-        pass
+        """
+        Returns the collection serialized as an array
+        """
+        return list(self.collection)
 
     def to_option(self):
-        pass
+        """
+        Returns an array of options
+        """
+        return dict(self.collection)

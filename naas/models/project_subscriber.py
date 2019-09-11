@@ -61,7 +61,7 @@ class ProjectSubscriber(object):
     def project_subscriber_properties(self):
         """Returns the associated project subscriber properties"""
         if self.project_subscriber_properties_attributes():
-            return naas.models.ProjectSubscriberProperties(
+            return ProjectSubscriberProperties(
                 self.project_subscriber_properties_attributes()
             )
         return ProjectSubscriberProperties.list_by_project_id_and_project_subscriber_id(
@@ -79,7 +79,35 @@ class ProjectSubscriber(object):
 
         @note: This is a WIP to test out this model
         """
-        pass
+        records = []
+        for project_property in self.project_properties().collection:
+            record_attributes = {
+                "project_property_id": project_property._id(),
+                "project_subscriber_property_id":  nil,
+                "name":  project_property.name(),
+                "key_name": project_property.key_name(),
+                "description": project_property.description(),
+                "value ": nil,
+                "is_subscriber_editable": project_property.is_subscriber_editable(),
+                "is_subscriber_viewable": project_property.is_subscriber_viewable()
+            }
+
+            subscriber_value = None
+
+            for i in self.project_subscriber_properties.collection:
+                if i.project_property_id() == project_property._id():
+                    subscriber_value = i
+                    break
+
+            if subscriber_value:
+                subscriber_attributes = {
+                    "project_subscriber_property_id": subscriber_value._id(),
+                    "value": subscriber_value.value(),
+                    "is_subscriber_editable": subscriber_value.is_subscriber_editable()
+                }
+                record_attributes.update(subscriber_attributes)
+            records.append(record_attributes)
+        return SubscriberProjectProperties(records)
 
     def profile_attributes(self):
         """Returns the profile attributes"""
