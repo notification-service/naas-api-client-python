@@ -8,6 +8,7 @@ verify_ssl = true
 [packages]
 requests = "*"
 uritemplate = "*"
+terminaltables = "~=3.1.0"
 iso8601 = "*"
 pytest = "*"
 
