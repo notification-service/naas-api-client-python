@@ -23,7 +23,7 @@ class ProjectProperties:
         return request
 
     @staticmethod
-    def retrieve_by_project_id(project_id, params=None):
+    def retrieve_by_project_id(project_id, _id, params=None):
         """
         Retrieve the instance of a project property by project
 
@@ -36,7 +36,8 @@ class ProjectProperties:
 
         rel = Client.rel_for('rels/project-property')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args={**params, **{'project_id': project_id}})
+        url = route.url_for(
+            args={**params, **{'project_id': project_id, 'id': _id}})
         request = Client.get(url)
         return request
 
@@ -58,7 +59,7 @@ class ProjectProperties:
         headers = {
             'Content-Type': 'application/json'
         }
-        rel = Client.rel_for('rels/projects')
+        rel = Client.rel_for('rels/project-properties')
         route = Client.routes().route_for(rel)
         url = route.url_for(args={**params, **{'project_id': project_id}})
         request = Client.post(
@@ -83,7 +84,7 @@ class ProjectProperties:
         headers = {
             'Content-Type': 'application/json'
         }
-        rel = Client.rel_for('rels/project')
+        rel = Client.rel_for('rels/project-properties')
         route = Client.routes().route_for(rel)
         url = route.url_for(args={**params, **{'project_id': project_id}})
         request = Client.put(

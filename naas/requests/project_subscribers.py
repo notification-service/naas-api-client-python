@@ -23,7 +23,7 @@ class ProjectSubscribers:
         return request
 
     @staticmethod
-    def retrieve_by_project_id(project_id, params=None):
+    def retrieve_by_project_id(project_id, _id, params=None):
         """
         Retrieve the instance of a project subscriber by project
 
@@ -36,7 +36,8 @@ class ProjectSubscribers:
 
         rel = Client.rel_for('rels/project-subscriber')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args={**params, **{'project_id': project_id}})
+        url = route.url_for(
+            args={**params, **{'project_id': project_id, 'id': _id}})
         request = Client.get(url)
         return request
 
@@ -51,7 +52,7 @@ class ProjectSubscribers:
         if params is None:
             params = {}
         request_body = {
-            "project": params
+            "project_subscriber": params
         }
         headers = {
             'Content-Type': 'application/json'

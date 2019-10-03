@@ -76,7 +76,7 @@ class ProjectSubscriberProperties:
         if params is None:
             params = {}
         request_body = {
-            "project": params
+            "project_subscriber_property": params
         }
         headers = {
             'Content-Type': 'application/json'
@@ -111,7 +111,7 @@ class ProjectSubscriberProperties:
         if params is None:
             params = {}
         request_body = {
-            "project": params
+            "project_subscriber_property": params
         }
         headers = {
             'Content-Type': 'application/json'

@@ -18,7 +18,7 @@ class ProjectSubscriberProfiles:
         if params is None:
             params = {}
 
-        rel = Client.rel_for('rels/project-property')
+        rel = Client.rel_for('rels/project-subscriber-profile')
         route = Client.routes().route_for(rel)
         url = route.url_for(
             args={
