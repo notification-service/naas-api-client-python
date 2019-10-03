@@ -3,7 +3,7 @@ from naas.models.links import Links
 from naas.models.project import Project
 from naas.models.projects import Projects
 from naas.models.project_property import ProjectProperty
-from nnaas.models.project_properties import ProjectProperties
+from naas.models.project_properties import ProjectProperties
 from naas.models.project_subscriber import ProjectSubscriber
 from nnaas.models.project_subscribers import ProjectSubscribers
 
