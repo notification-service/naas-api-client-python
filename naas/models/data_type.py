@@ -24,7 +24,7 @@ class DataType(object):
 
     def description(self):
         """Returns the data type description"""
-        return self.attributes.get('id')
+        return self.attributes.get('description')
 
     def created_at(self):
         """Returns the created at timestamp"""

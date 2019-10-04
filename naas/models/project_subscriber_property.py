@@ -5,7 +5,7 @@ from naas.models.projects import Projects
 from naas.models.project_property import ProjectProperty
 from naas.models.project_properties import ProjectProperties
 from naas.models.project_subscriber import ProjectSubscriber
-from nnaas.models.project_subscribers import ProjectSubscribers
+from naas.models.project_subscribers import ProjectSubscribers
 
 
 class ProjectSubscriberProperty(object):

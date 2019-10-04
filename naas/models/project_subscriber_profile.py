@@ -1,7 +1,11 @@
+import naas
+from naas.configuration import Configuration
+from naas.errors import InvalidRequestError
+from naas.models.error import Error
 from naas.models.project import Project
 from naas.models.projects import Projects
 from naas.models.project_subscriber import ProjectSubscriber
-from nnaas.models.project_subscribers import ProjectSubscribers
+from naas.models.project_subscribers import ProjectSubscribers
 
 
 class ProjectSubscriberProfile(object):
@@ -15,8 +19,8 @@ class ProjectSubscriberProfile(object):
 
     def __init__(self, attributes={}):
         self.attributes = attributes
-        self.project_id =
-        self.project_subscriber_id =
+        self.project_id = self.attributes.get('project_id')
+        self.project_subscriber_id = self.attributes.get('project_subscriber_id')
         for key, value in self.attributes.items():
             setattr(self, key, value)
             getattr(self, key)

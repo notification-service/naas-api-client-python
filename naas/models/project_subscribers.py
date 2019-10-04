@@ -1,4 +1,7 @@
 import naas
+from naas.configuration import Configuration
+from naas.errors import InvalidRequestError, RecordNotFoundError
+from naas.models.error import Error
 from naas.models.project_subscriber import ProjectSubscriber
 
 
@@ -12,9 +15,8 @@ class ProjectSubscribers(object):
     This returns an instance of the Project Subscribers model
     """
 
-
-COLUMNS = ['ID', 'Project ID', 'Subscriber ID', 'Email Addresses', 'Code',
-           'Created At']
+    COLUMNS = ['ID', 'Project ID', 'Subscriber ID', 'Email Addresses', 'Code',
+               'Created At']
 
     def __init__(self, collection):
         self.collection = list(collection)
