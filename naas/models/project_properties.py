@@ -1,4 +1,6 @@
 import naas
+from naas.errors import InvalidRequestError, RecordNotFoundError
+from naas.models.error import Error
 from naas.models.project_property import ProjectProperty
 
 
@@ -153,7 +155,7 @@ class ProjectProperties(object):
         """
         viewable = []
         for project_property in self.collection:
-            if project_property.is_subscriber_viewable():
+            if ProjectProperty(project_property).is_subscriber_viewable():
                 viewable.append(project_property)
         return viewable
 
@@ -163,6 +165,6 @@ class ProjectProperties(object):
         """
         editable = []
         for project_property in self.collection:
-            if project_property.is_subscriber_editable():
+            if ProjectProperty(project_property).is_subscriber_editable():
                 viewable.append(project_property)
         return editable

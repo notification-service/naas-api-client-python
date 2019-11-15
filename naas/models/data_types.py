@@ -1,4 +1,6 @@
 import naas
+from naas.configuration import Configuration
+from naas.errors import RecordNotFoundError
 from naas.models.data_type import DataType
 
 
@@ -51,7 +53,7 @@ class DataTypes(object):
         )
 
     @staticmethod
-    def retrieve(_id, params):
+    def retrieve(_id, params=None):
         """
         Helper method to retrieve from the request
         :param _id: str

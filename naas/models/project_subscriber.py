@@ -1,6 +1,9 @@
 import iso8601
+import naas
 from naas.models.links import Links
 from naas.models.project_properties import ProjectProperties
+from naas.models.subscriber_project_properties import SubscriberProjectProperties
+from naas.models.project_subscriber_profile import ProjectSubscriberProfile
 from naas.models.project_subscriber_properties import ProjectSubscriberProperties
 
 
@@ -83,11 +86,11 @@ class ProjectSubscriber(object):
         for project_property in self.project_properties().collection:
             record_attributes = {
                 "project_property_id": project_property._id(),
-                "project_subscriber_property_id":  nil,
+                "project_subscriber_property_id":  None,
                 "name":  project_property.name(),
                 "key_name": project_property.key_name(),
                 "description": project_property.description(),
-                "value ": nil,
+                "value ": None,
                 "is_subscriber_editable": project_property.is_subscriber_editable(),
                 "is_subscriber_viewable": project_property.is_subscriber_viewable()
             }

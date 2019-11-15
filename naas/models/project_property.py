@@ -34,8 +34,8 @@ class ProjectProperty(object):
 
     def data_type(self):
         """Returns the data type model"""
-        if self.data_type_attribute():
-            return naas.models.DataType(self.data_type_attributes)
+        if self.data_type_attributes():
+            return naas.models.DataType(self.data_type_attributes())
         return naas.models.DataTypes.retrieve(self.data_type_id())
 
     def name(self):

@@ -24,7 +24,7 @@ class SubscriberProjectProperty(object):
     def subscriber_provided_value(self):
         """Returns a boolean after checking the subscriber_provided_value"""
         if self.project_subscriber_property_id():
-            return true
+            return True
         return False
 
     def name(self):

@@ -1,6 +1,7 @@
 import naas
 from naas.configuration import Configuration
-from naas.errors import InvalidRequestError, RecordNotFoundError
+from naas.errors import InvalidRequestError
+from naas.models.error import Error
 from naas.models.project_subscriber_property import ProjectSubscriberProperty
 
 
