@@ -67,4 +67,7 @@ class EmailNotificationBasics:
                 {"account_smtp_setting_id": options["account_smtp_setting_id"]}
             )
 
+        if 'from_name' in options:
+            record_attributes.update({ "from_name": options["from_name"] })
+
         return cls.create(record_attributes)
