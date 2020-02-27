@@ -28,6 +28,7 @@ class ProjectProperties:
         Retrieve the instance of a project property by project
 
         :param project_id: int
+        :param id: int
         :param params: dict
         :return: Response
         """
@@ -72,6 +73,7 @@ class ProjectProperties:
         Update an existing record
 
         :param project_id: int
+        :param id: int
         :param params: dict
         :return: Response
         """
