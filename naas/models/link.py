@@ -39,3 +39,8 @@ class Link(object):
             return url.expand(args)
         else:
             return self.href()
+
+    def to_csv(self):
+        """Returns the record as CSV"""
+        return [self.title(), self.href()]
+

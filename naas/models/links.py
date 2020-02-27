@@ -40,3 +40,12 @@ class Links(object):
             if Link(record).rel() == rel:
                 return record
         raise LinkNotFoundError
+
+    def to_csv(self):
+        """Returns the collection serialized as CSV"""
+        headings = ['Name', 'Url']
+        data     = [r.to_csv() for r in self]
+
+        data.insert(0, headings)
+
+        return data
