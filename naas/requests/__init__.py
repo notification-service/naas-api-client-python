@@ -7,6 +7,9 @@ The NAAS API Client Requests
 
 """
 
+from naas.requests.invitations import Invitations
+from naas.requests.addons import Addons
+from naas.requests.account_addons import AccountAddons
 from naas.requests.accounts import Accounts
 from naas.requests.account_settings import AccountSettings
 from naas.requests.account_smtp_settings import AccountSmtpSettings
