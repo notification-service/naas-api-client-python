@@ -1,6 +1,8 @@
+import naas
 import iso8601
 
 from naas.models.links import Links
+import naas.models.invitations as InvitationsModel
 
 
 class Invitation(object):
@@ -14,6 +16,14 @@ class Invitation(object):
 
     def __init__(self, attributes):
         self.attributes = attributes
+
+    def accept(self):
+        """Accept the invitation"""
+        return InvitationsModel.Invitations.accept(self.id())
+
+    def decline(self):
+        """Accept the invitation"""
+        return InvitationsModel.Invitations.decline(self.id())
 
     def id(self):
         """Returns the invitation id"""

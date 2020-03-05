@@ -83,3 +83,57 @@ class Invitations(object):
         Configuration(
             {"logger": f"Failure retrieving the invitation {request.status_code}"}
         )
+
+    @staticmethod
+    def accept(_id, params=None):
+        """
+        Helper method to accept the invitation
+
+        :param _id: str
+        :param params: dict
+        :return: Invitation
+        """
+        if params is None:
+            params = {}
+
+        request = naas.requests.Invitations.accept(_id, params)
+
+        if request:
+            return InvitationModel(request.json().get('data'))
+        elif request.status_code == 404:
+            raise RecordNotFoundError(f"Could not find record with {_id}")
+            return
+        elif request.status_code == 422:
+            raise RecordNotFoundError(f"Unprocessable record with {_id}")
+            return
+
+        Configuration(
+            {"logger": f"Failure accepting the invitation {request.status_code}"}
+        )
+
+    @staticmethod
+    def decline(_id, params=None):
+        """
+        Helper method to decline the invitation
+
+        :param _id: str
+        :param params: dict
+        :return: Invitation
+        """
+        if params is None:
+            params = {}
+
+        request = naas.requests.Invitations.decline(_id, params)
+
+        if request:
+            return InvitationModel(request.json().get('data'))
+        elif request.status_code == 404:
+            raise RecordNotFoundError(f"Could not find record with {_id}")
+            return
+        elif request.status_code == 422:
+            raise RecordNotFoundError(f"Unprocessable record with {_id}")
+            return
+
+        Configuration(
+            {"logger": f"Failure accepting the invitation {request.status_code}"}
+        )
