@@ -7,6 +7,17 @@ The NAAS API Client Models
 
 """
 
+#from naas.models.project_subscribers import ProjectSubscribers
+#from naas.models.project_subscriber import ProjectSubscriber
+#from naas.models.project_subscriber_profile import ProjectSubscriberProfile
+#from naas.models.project_subscriber_properties import ProjectSubscriberProperties
+#from naas.models.project_subscriber_property import ProjectSubscriberProperty
+from naas.models.subscriber_project_properties import SubscriberProjectProperties
+from naas.models.subscriber_project_property import SubscriberProjectProperty
+from naas.models.project_properties import ProjectProperties
+from naas.models.project_property import ProjectProperty
+from naas.models.data_types import DataTypes
+from naas.models.data_type import DataType
 from naas.models.projects import Projects
 from naas.models.project import Project
 from naas.models.links import Links

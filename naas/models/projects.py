@@ -6,6 +6,15 @@ from naas.models.error import Error
 
 
 class Projects(object):
+    """
+
+    Projects
+    ===============
+
+    This returns an instance of the Projects model
+    """
+    COLUMNS = ['ID', 'Name', 'Description', 'Campaigns', 'Created At']
+
     def __init__(self, collection):
         self.collection = list(collection)
         self.index = len(collection)
@@ -19,6 +28,12 @@ class Projects(object):
             raise StopIteration
         self.index = self.index - 1
         return self.collection[self.index]
+
+    def headings(self):
+        """
+        Helper to retrieve the headings collection
+        """
+        return self.COLUMNS
 
     @classmethod
     def list(cls, params=None):
@@ -89,3 +104,9 @@ class Projects(object):
 
         Configuration({"logger": f"failure_message"})
         raise InvalidRequestError(failure_message)
+
+    def to_a(self):
+        """
+        Returns the collection serialized as an array
+        """
+        return list(self.collection)
