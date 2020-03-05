@@ -19,8 +19,8 @@ class ProjectSubscriberProfile(object):
 
     def __init__(self, attributes={}):
         self.attributes = attributes
-        self.project_id = self.attributes.get('project_id')
-        self.project_subscriber_id = self.attributes.get('project_subscriber_id')
+        #self.project_id = self.attributes.get('project_id')
+        #self.project_subscriber_id = self.attributes.get('project_subscriber_id')
         for key, value in self.attributes.items():
             setattr(self, key, value)
             getattr(self, key)

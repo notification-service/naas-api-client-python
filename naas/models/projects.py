@@ -29,11 +29,12 @@ class Projects(object):
         self.index = self.index - 1
         return self.collection[self.index]
 
-    def headings(self):
+    @classmethod
+    def headings(cls):
         """
         Helper to retrieve the headings collection
         """
-        return self.COLUMNS
+        return cls.COLUMNS
 
     @classmethod
     def list(cls, params=None):
