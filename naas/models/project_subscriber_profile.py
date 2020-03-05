@@ -4,8 +4,8 @@ from naas.errors import InvalidRequestError
 from naas.models.error import Error
 from naas.models.project import Project
 from naas.models.projects import Projects
-from naas.models.project_subscriber import ProjectSubscriber
-from naas.models.project_subscribers import ProjectSubscribers
+#from naas.models.project_subscriber import ProjectSubscriber as ProjectSubscriberModel
+#from naas.models.project_subscribers import ProjectSubscribers as ProjectSubscribersModel
 
 
 class ProjectSubscriberProfile(object):
@@ -109,6 +109,6 @@ class ProjectSubscriberProfile(object):
     def project_subscriber(self):
         """Returns an instance of the project subscriber"""
         if self.project_subscriber_attributes():
-            return ProjectSubscriber(self.project_subscriber_attributes())
-        return ProjectSubscribers.retrieve_by_project_id(
+            return ProjectSubscriberModel(self.project_subscriber_attributes())
+        return ProjectSubscribersModel.retrieve_by_project_id(
             self.project_id(), self.project_subscriber_id())

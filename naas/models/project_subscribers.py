@@ -15,8 +15,7 @@ class ProjectSubscribers(object):
     This returns an instance of the Project Subscribers model
     """
 
-    COLUMNS = ['ID', 'Project ID', 'Subscriber ID', 'Email Addresses', 'Code',
-               'Created At']
+    COLUMNS = ['ID', 'Project ID', 'Subscriber ID', 'Email Addresses', 'Code', 'Created At']
 
     def __init__(self, collection):
         self.collection = list(collection)
@@ -49,8 +48,7 @@ class ProjectSubscribers(object):
         if not params:
             params = {}
 
-        request = naas.requests.ProjectSubscribers.list_by_project_id(
-            project_id, params)
+        request = naas.requests.ProjectSubscribers.list_by_project_id(project_id, params)
 
         klass_attributes = []
 
@@ -78,8 +76,7 @@ class ProjectSubscribers(object):
         if not params:
             params = {}
 
-        request = naas.requests.ProjectSubscribers.retrieve_by_project_id(
-            project_id, _id, params)
+        request = naas.requests.ProjectSubscribers.retrieve_by_project_id(project_id, _id, params)
 
         if request:
             return ProjectSubscriber(request.json().get('data'))
@@ -106,15 +103,13 @@ class ProjectSubscribers(object):
         if not params:
             params = {}
 
-        request = naas.requests.ProjectSubscribers.create_by_project_id(
-            project_id, params)
+        request = naas.requests.ProjectSubscribers.create_by_project_id(project_id, params)
 
         if request:
             return ProjectSubscriber(request.json().get('data'))
 
         error = Error(request.json().get('data'))
-        failure_message = (
-            f"Failure creating the record {error.full_messages()}")
+        failure_message = (f"Failure creating the record {error.full_messages()}")
 
         Configuration({"logger": f"{failure_message}"})
         raise InvalidRequestError(failure_message)

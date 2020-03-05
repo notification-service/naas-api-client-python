@@ -166,5 +166,5 @@ class ProjectProperties(object):
         editable = []
         for project_property in self.collection:
             if ProjectProperty(project_property).is_subscriber_editable():
-                viewable.append(project_property)
+                editable.append(project_property)
         return editable

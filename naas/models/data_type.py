@@ -14,7 +14,7 @@ class DataType(object):
     def __init__(self, attributes={}):
         self.attributes = attributes
 
-    def _id(self):
+    def id(self):
         """Returns the data type id"""
         return self.attributes.get('id')
 
@@ -43,8 +43,8 @@ class DataType(object):
 
     def to_a(self):
         """Returns the record serialized as an array"""
-        return [self._id(), self.name(), self.description(), self.created_at()]
+        return [self.id(), self.name(), self.description(), self.created_at()]
 
     def to_option(self):
         """Returns the record as an option"""
-        return [self.name(), self._id()]
+        return [self.name(), self.id()]

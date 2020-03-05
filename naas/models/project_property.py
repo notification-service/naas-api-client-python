@@ -16,7 +16,7 @@ class ProjectProperty(object):
     def __init__(self, attributes={}):
         self.attributes = attributes
 
-    def _id(self):
+    def id(self):
         """Returns the data type id"""
         return self.attributes.get('id')
 
@@ -76,7 +76,7 @@ class ProjectProperty(object):
     def to_a(self):
         """Serialized the record as an array"""
         return [
-            self._id(), self.project_id(), self.data_type_id(), self.name(),
+            self.id(), self.project_id(), self.data_type_id(), self.name(),
             self.key_name(), self.description(), self.is_subscriber_editable(),
             self.is_subscriber_viewable(), self.created_at()
         ]

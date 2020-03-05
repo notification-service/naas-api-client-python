@@ -1,6 +1,7 @@
 import iso8601
 import naas
 from naas.models.links import Links
+from naas.models.subscriber_email_addresses import SubscriberEmailAddresses
 from naas.models.project_properties import ProjectProperties
 from naas.models.subscriber_project_properties import SubscriberProjectProperties
 from naas.models.project_subscriber_profile import ProjectSubscriberProfile
@@ -19,7 +20,7 @@ class ProjectSubscriber(object):
     def __init__(self, attributes={}):
         self.attributes = attributes
 
-    def _id(self):
+    def id(self):
         """Returns the id"""
         return self.attributes.get('id')
 
@@ -64,11 +65,9 @@ class ProjectSubscriber(object):
     def project_subscriber_properties(self):
         """Returns the associated project subscriber properties"""
         if self.project_subscriber_properties_attributes():
-            return ProjectSubscriberProperties(
-                self.project_subscriber_properties_attributes()
-            )
+            return ProjectSubscriberProperties(self.project_subscriber_properties_attributes())
         return ProjectSubscriberProperties.list_by_project_id_and_project_subscriber_id(
-            self.project_id(), self._id()
+            self.project_id(), self.id()
         )
 
     def project_properties(self):
@@ -85,7 +84,7 @@ class ProjectSubscriber(object):
         records = []
         for project_property in self.project_properties().collection:
             record_attributes = {
-                "project_property_id": project_property._id(),
+                "project_property_id": project_property.id(),
                 "project_subscriber_property_id":  None,
                 "name":  project_property.name(),
                 "key_name": project_property.key_name(),
@@ -98,13 +97,13 @@ class ProjectSubscriber(object):
             subscriber_value = None
 
             for i in self.project_subscriber_properties.collection:
-                if i.project_property_id() == project_property._id():
+                if i.project_property_id() == project_property.id():
                     subscriber_value = i
                     break
 
             if subscriber_value:
                 subscriber_attributes = {
-                    "project_subscriber_property_id": subscriber_value._id(),
+                    "project_subscriber_property_id": subscriber_value.id(),
                     "value": subscriber_value.value(),
                     "is_subscriber_editable": subscriber_value.is_subscriber_editable()
                 }
@@ -121,7 +120,7 @@ class ProjectSubscriber(object):
         if self.profile_attributes():
             return ProjectSubscriberProfile(self.profile_attributes())
         return ProjectSubscriberProfile.retrieve_by_project_id_and_project_subscriber_id(
-            self.project_id(), self._id()
+            self.project_id(), self.id()
         )
 
     def is_opted_in(self):
@@ -155,7 +154,7 @@ class ProjectSubscriber(object):
     def to_a(self):
         """Serialized the record as an array"""
         return [
-            self._id(), self.project_id(), self.subscriber_id(),
+            self.id(), self.project_id(), self.subscriber_id(),
             self.subscriber_email_addresses_display_name(), self.code(),
             self.created_at()
         ]
