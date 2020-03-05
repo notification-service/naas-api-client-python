@@ -12,10 +12,12 @@ class Addons:
         :param params: dict
         :return: Response
         """
-        rel = Client.rel_for('rels/addons')
+        rel   = Client.rel_for('rels/addons')
         route = Client.routes().route_for(rel)
-        url = route.url_for()
+        url   = route.url_for()
+
         request = Client.get(url)
+
         return request
 
     @staticmethod
@@ -29,8 +31,11 @@ class Addons:
         """
         if params is None:
             params = {}
-        rel = Client.rel_for('rels/addon')
+
+        rel   = Client.rel_for('rels/addon')
         route = Client.routes().route_for(rel)
-        url = route.url_for(args={**params, **{'id': _id}})
+        url   = route.url_for(args={**params, **{'id': _id}})
+
         request = Client.get(url)
+
         return request
