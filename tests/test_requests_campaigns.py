@@ -8,15 +8,15 @@ class TestRequestsCampaigns(BaseTestCase):
     def test_create_by_project_id_no_params_unsuccessful(self):
         response = Campaigns.create_by_project_id("random_id")
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['message'], 'Bad Request')
-        self.assertEqual(response.json()['errors'],
-                         ['param is missing or the value is empty: campaign'])
+        self.assertEqual(response.json()['data']['message'], 'Bad Request')
+        self.assertEqual(response.json()['data']['errors'][0]['message'],
+                         'param is missing or the value is empty: campaign')
 
     def test_create_by_project_id_invalid_id_unsuccessful(self):
         params = {'name': 'testing', 'description': 'My description'}
         response = Campaigns.create_by_project_id("random_id", params)
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_create_by_project_id_valid_id_missing_name_unsuccessful(self):
         params_project = {
@@ -52,7 +52,7 @@ class TestRequestsCampaigns(BaseTestCase):
     def test_list_by_project_id_invalid_id_unsuccessful(self):
         response = Campaigns.list_by_project_id("invalid_id")
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_list_by_project_id_valid_id_successful(self):
         params_project = {
@@ -76,7 +76,7 @@ class TestRequestsCampaigns(BaseTestCase):
         response = Campaigns.retrieve_by_project_id(
             "invalid_project_id", "invalid_campaign_id")
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_retrieve_by_project_id_valid_project_id_invalid_id_fails(self):
         params_project = {
@@ -89,7 +89,7 @@ class TestRequestsCampaigns(BaseTestCase):
         response = Campaigns.retrieve_by_project_id(
             project_created['id'], "invalid_campaign_id")
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_retrieve_by_project_id_successful(self):
         params_project = {
@@ -112,7 +112,7 @@ class TestRequestsCampaigns(BaseTestCase):
         response = Campaigns.update_by_project_id(
             "invalid_project_id", "invalid_campaign_id")
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_update_by_project_id_valid_project_id_invalid_id_fails(self):
         params_project = {
@@ -125,7 +125,7 @@ class TestRequestsCampaigns(BaseTestCase):
         response = Campaigns.update_by_project_id(
             project_created['id'], "invalid_campaign_id")
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_update_by_project_id_successful(self):
         params_project = {

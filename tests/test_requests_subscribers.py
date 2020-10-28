@@ -12,10 +12,10 @@ class TestRequestsSubscribers(BaseTestCase):
     def test_create_no_params_unsuccessful(self):
         response = Subscriber.create()
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['message'], 'Bad Request')
+        self.assertEqual(response.json()['data']['message'], 'Bad Request')
         self.assertEqual(
-            response.json()['errors'],
-            ['param is missing or the value is empty: subscriber']
+            response.json()['data']['errors'][0]['message'],
+            'param is missing or the value is empty: subscriber'
         )
 
     def test_create_with_params_successful(self):
@@ -33,7 +33,7 @@ class TestRequestsSubscribers(BaseTestCase):
     def test_retrieve_invalid_id_unsuccessful(self):
         response = Subscriber.retrieve('invalid_id')
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_retrieve_valid_id_successful(self):
         subscriber = {
@@ -52,7 +52,7 @@ class TestRequestsSubscribers(BaseTestCase):
     def test_update_invalid_id_unsuccessful(self):
         response = Subscriber.update('invalid_id')
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_update_valid_id_no_params_unsuccessful(self):
         subscriber = {
@@ -65,10 +65,10 @@ class TestRequestsSubscribers(BaseTestCase):
         response = Subscriber.update(subscriber_created['id'])
 
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['message'], 'Bad Request')
+        self.assertEqual(response.json()['data']['message'], 'Bad Request')
         self.assertEqual(
-            response.json()['errors'],
-            ['param is missing or the value is empty: subscriber']
+            response.json()['data']['errors'][0]['message'],
+            'param is missing or the value is empty: subscriber'
         )
 
     def test_update_valid_id_params_successful(self):

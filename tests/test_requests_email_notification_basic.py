@@ -7,10 +7,10 @@ class TestRequestsEmailNotificationBasics(BaseTestCase):
     def test_create_no_params_unsuccessful(self):
         response = EmailNotificationBasics.create()
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['message'], 'Bad Request')
+        self.assertEqual(response.json()['data']['message'], 'Bad Request')
         self.assertEqual(
-            response.json()['errors'],
-            ['param is missing or the value is empty: email_notification_basic']
+            response.json()['data']['errors'][0]['message'],
+            'param is missing or the value is empty: email_notification_basic'
         )
 
     def test_create_successful(self):
