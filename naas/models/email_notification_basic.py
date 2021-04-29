@@ -13,10 +13,7 @@ class EmailNotificationBasic(object):
     """
 
     @staticmethod
-    def create(
-            email_address, project_id, campaign_id,
-            campaign_email_template_id, content=None, options=None
-    ):
+    def create(email_address, project_id, campaign_id, campaign_email_template_id, content=None, options=None):
         """
         Helper method to create from the request
         :param email_address: str
@@ -27,17 +24,13 @@ class EmailNotificationBasic(object):
         :param options: dict
         :return: EmailNotification
         """
-        request = naas.requests.EmailNotificationBasics.create_from_attributes(
-            email_address, project_id, campaign_id,
-            campaign_email_template_id, content, options
-        )
+        request = naas.requests.EmailNotificationBasics.create_from_attributes(email_address, project_id, campaign_id, campaign_email_template_id, content, options)
 
         if request:
             return EmailNotification(request.json().get('data'))
 
         Configuration(
             {
-                "logger": ("Failure retrieving the email "
-                           f"notification {request.status_code}")
+                "logger": (f"Failure retrieving the email notification {request.status_code}")
             }
         )

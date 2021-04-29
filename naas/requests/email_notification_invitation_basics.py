@@ -32,7 +32,7 @@ class EmailNotificationInvitationBasics:
         return request
 
     @classmethod
-    def create_from_attributes(cls, email_address, project_id, campaign_id, campaign_email_template_id, sender_email_address, from_name, content=None, options=None):
+    def create_from_attributes(cls, email_address, project_id, campaign_id, campaign_email_template_id, sender_email_address, from_name=None, content=None, options=None):
         """
         Provides a simpler set of arguments to create
         the basic notification
@@ -41,6 +41,8 @@ class EmailNotificationInvitationBasics:
         :param project_id: str
         :param campaign_id: str
         :param campaign_email_template_id: str
+        :param sender_email_address: str
+        :param from_name: str
         :param content: dict
         :param options: dict
         :return: Response
