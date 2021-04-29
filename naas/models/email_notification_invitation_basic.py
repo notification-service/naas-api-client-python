@@ -14,7 +14,7 @@ class EmailNotificationInvitationBasic(object):
     """
 
     @staticmethod
-    def create(email_address, project_id, campaign_id, campaign_email_template_id, sender_email_address, from_name, content=None, options=None):
+    def create(email_address, project_id, campaign_id, campaign_email_template_id, sender_email_address, from_name=None, content=None, options=None):
         """
         Helper method to create from the request
         :param email_address: str

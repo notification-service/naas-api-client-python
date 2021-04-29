@@ -22,7 +22,7 @@ class TestRequestsCampaignEmailTemplates(BaseTestCase):
             campaign_email_template_attributes
         )
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_create_by_valid_project_id_and_invalid_campaign_id_fail(self):
         campaign_email_template_attributes = {
@@ -47,7 +47,7 @@ class TestRequestsCampaignEmailTemplates(BaseTestCase):
             campaign_email_template_attributes
         )
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_create_by_project_id_and_campaign_id_no_params_fail(self):
         params_project = {
@@ -67,10 +67,10 @@ class TestRequestsCampaignEmailTemplates(BaseTestCase):
             campaign_created['id']
         )
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['message'], 'Bad Request')
+        self.assertEqual(response.json()['data']['message'], 'Bad Request')
         self.assertEqual(
-            response.json()['errors'],
-            ['param is missing or the value is empty: campaign_email_template']
+            response.json()['data']['errors'][0]['message'],
+            'param is missing or the value is empty: campaign_email_template'
         )
 
     def test_create_by_project_id_and_campaign_id_with_params_successful(self):
@@ -112,7 +112,7 @@ class TestRequestsCampaignEmailTemplates(BaseTestCase):
             'invalid_camp'
         )
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_list_by_project_id_and_campaign_id_valid_id_successful(self):
         params_project = {
@@ -140,7 +140,7 @@ class TestRequestsCampaignEmailTemplates(BaseTestCase):
             'invalid_template'
         )
         self.assertEqual(resp.status_code, 404)
-        self.assertEqual(resp.json()['message'], 'Not Found')
+        self.assertEqual(resp.json()['data']['message'], 'Not Found')
 
     def test_retrieve_by_project_id_and_campaign_id_valid_id_successful(self):
         campaign_email_template_attributes = {

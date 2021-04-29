@@ -12,9 +12,9 @@ class TestRequestsProjects(BaseTestCase):
     def test_create_no_params_unsuccessful(self):
         response = Projects.create()
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['message'], 'Bad Request')
-        self.assertEqual(response.json()['errors'],
-                         ['param is missing or the value is empty: project'])
+        self.assertEqual(response.json()['data']['message'], 'Bad Request')
+        self.assertEqual(response.json()['data']['errors'][0]['message'],
+                         'param is missing or the value is empty: project')
 
     def test_create_missing_name_parameter_unsuccessful(self):
         params = {'description': 'Test description'}
@@ -36,7 +36,7 @@ class TestRequestsProjects(BaseTestCase):
     def test_retrieve_invalid_id_unsuccessful(self):
         response = Projects.retrieve('invalid_id')
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_retrieve_valid_id_successful(self):
         params = {
@@ -54,7 +54,7 @@ class TestRequestsProjects(BaseTestCase):
     def test_update_invalid_id_unsuccessful(self):
         response = Projects.update('invalid_id')
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_update_valid_id_no_params_unsuccessful(self):
         params = {
@@ -66,9 +66,9 @@ class TestRequestsProjects(BaseTestCase):
 
         response = Projects.update(project_created['id'])
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['message'], 'Bad Request')
-        self.assertEqual(response.json()['errors'],
-                         ['param is missing or the value is empty: project'])
+        self.assertEqual(response.json()['data']['message'], 'Bad Request')
+        self.assertEqual(response.json()['data']['errors'][0]['message'],
+                         'param is missing or the value is empty: project')
 
     def test_update_valid_id_params_successful(self):
         params = {

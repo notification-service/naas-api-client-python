@@ -15,8 +15,8 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages(where='.', exclude=['tests.*']),
     install_requires=[
-            "requests == 2.21.0",
-            "uritemplate == 3.0.0",
-            "iso8601 == 0.1.12"
+            "requests >= 2.21.0",
+            "uritemplate >= 3.0.0",
+            "iso8601 >= 0.1.12"
     ]
 )

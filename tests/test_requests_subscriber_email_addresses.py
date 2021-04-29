@@ -13,11 +13,10 @@ class TestRequestsSubscriberEmailAddresses(BaseTestCase):
     def test_create_no_params_unsuccessful(self):
         response = SubscriberEmailAddresses.create()
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['message'], 'Bad Request')
+        self.assertEqual(response.json()['data']['message'], 'Bad Request')
         self.assertEqual(
-            response.json()['errors'],
-            ['param is missing or the value is empty: '
-             'subscriber_email_address']
+            response.json()['data']['errors'][0]['message'],
+            'param is missing or the value is empty: subscriber_email_address'
         )
 
     def test_create_with_invalid_subscriber_unsuccessful(self):
@@ -60,7 +59,7 @@ class TestRequestsSubscriberEmailAddresses(BaseTestCase):
     def test_retrieve_invalid_id_unsuccessful(self):
         response = SubscriberEmailAddresses.retrieve('invalid_id')
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_retrieve_valid_id_successful(self):
         subscriber = {
@@ -89,7 +88,7 @@ class TestRequestsSubscriberEmailAddresses(BaseTestCase):
     def test_list_by_subscriber_id_invalid_id_unsuccessful(self):
         response = SubscriberEmailAddresses.list_by_subscriber_id('invalid_id')
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.json()['message'], 'Not Found')
+        self.assertEqual(response.json()['data']['message'], 'Not Found')
 
     def test_list_by_subscriber_id_valid_id_successful(self):
         subscriber = {
